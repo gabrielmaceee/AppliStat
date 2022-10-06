@@ -7,7 +7,7 @@ private double[] donnees;
 private int taille;
 private double[] donneesTriees;
 
-échantillon(double [] TabDonnees) {
+echantillon(double [] TabDonnees) {
 	if(TabDonnees.length ==0) {
 	this.donnees = new double[0];
 	taille = 0;
@@ -49,9 +49,7 @@ double getMediane() {
 	int m = taille/2;
 	return (donneesTriees[m]+donneesTriees[m+1])/2;
 }
-double getSCE() {};
-double getSCM() {};
-double getSCT() {};
+
 double getQuantiles(int quantile) {};
 
 	public static void main(String[] args) {
