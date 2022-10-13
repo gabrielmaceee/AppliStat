@@ -2,13 +2,13 @@ package Statistiques;
 
 import java.util.Arrays;
 
-class echantillon {
+class Echantillon {
 	
-	double[] donnees;
-	int taille;
-	double[] donneesTriees;
+double[] donnees;
+int taille;
+double[] donneesTriees;
 
-	echantillon(double [] TabDonnees) {
+	Echantillon(double [] TabDonnees) {
 		if(TabDonnees.length ==0) {
 			throw new IllegalArgumentException("le tableau est vide");
 		} else { 
@@ -16,7 +16,7 @@ class echantillon {
 			this.donnees = TabDonnees;
 		}	
 		donneesTriees = donnees;
-		Arrays.sort(donneesTriees);
+		//Arrays.sort(donneesTriees);
 	}
 
 
@@ -56,11 +56,22 @@ class echantillon {
 		}
 		return SCT;
 	}
+	public String toString() {
+		String s ="";
+		for(int i=0; i<taille; i++) {
+			if(i!= taille-1) s += donnees[i] + ", ";
+			else s += donnees[i];
+		}
+		return s;
+	}
 
-	double getQuantiles(int quantile) {};
+	//double getQuantiles(int quantile) {};
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		double [] i1 = {1.52, 1.56, 1.54};
+		Echantillon v1 = new Echantillon(i1);
+		System.out.println(v1.toString());
 
 	}
 

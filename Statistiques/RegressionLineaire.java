@@ -1,10 +1,10 @@
 package Statistiques;
 
 public class RegressionLineaire {
-	private echantillon vd;
-	private echantillon vi;
+Echantillon vd;
+Echantillon vi;
 	
-RegressionLineaire (echantillon vi, echantillon vd){
+RegressionLineaire (Echantillon vi, Echantillon vd){
 	if (vi.taille != vd.taille) throw new IllegalArgumentException("Les échantillons doivent être de même taille");
 	this.vd = vd;
 	this.vi = vi;
@@ -28,13 +28,32 @@ double getr() {
 double getR() {
 	return getr()*getr();
 }
+double getSCM() {
+	return getR()*vd.getSCT();
+}
+
+double getSCE() {
+	return vi.getSCT()-getSCM();
+}
+
+double getF() {
+	return (getSCM()*(vd.taille-2))/getSCE();
+}
+double getQuantile() {
+	return 0;
+}
+boolean decision() {
+	if (getF()>getQuantile())
+		return true;//vi explique vd
+	return false;
+}
 
 public static void main(String[] args) {
 	// TODO Auto-generated method stub
 	double [] i = {1,2,3,4};
 	double [] d = {2,4,6,8};
- echantillon vd = new echantillon(d);
- echantillon vi = new echantillon(i);
+ Echantillon vd = new Echantillon(d);
+ Echantillon vi = new Echantillon(i);
 
  RegressionLineaire test = new RegressionLineaire(vi,vd);
  System.out.println("cov="+test.getCov());
