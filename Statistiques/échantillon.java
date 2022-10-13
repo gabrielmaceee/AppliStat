@@ -20,6 +20,9 @@ echantillon(double [] TabDonnees) {
 	donneesTriees = donnees;
 	Arrays.sort(donneesTriees);
 }
+int getTaille() {
+	return taille;
+}
 
 double getMoyenne(){
 	double moyenne = 0;
