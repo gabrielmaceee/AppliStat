@@ -10,7 +10,7 @@ private double[] donneesTriees;
 echantillon(double [] TabDonnees) {
 	if(TabDonnees.length ==0) {
 	this.donnees = new double[0];
-	taille = 0;
+	taille = TabDonnes.length;
 	throw new IllegalArgumentException("le tableau est vide");
 	}
 
