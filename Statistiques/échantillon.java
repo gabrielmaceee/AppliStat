@@ -3,9 +3,9 @@ package Statistiques;
 import java.util.Arrays;
 
 class echantillon {
-private double[] donnees;
-private int taille;
-private double[] donneesTriees;
+double[] donnees;
+int taille;
+double[] donneesTriees;
 
 echantillon(double [] TabDonnees) {
 	if(TabDonnees.length ==0) {
@@ -20,9 +20,7 @@ echantillon(double [] TabDonnees) {
 	donneesTriees = donnees;
 	Arrays.sort(donneesTriees);
 }
-int getTaille() {
-	return taille;
-}
+
 
 double getMoyenne(){
 	double moyenne = 0;
