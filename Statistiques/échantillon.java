@@ -32,7 +32,7 @@ class echantillon {
 		for(int i = 0; i<taille; i ++) {
 			var += Math.pow((donnees[i]- getMoyenne()),2);
 		}
-		return var/taille;
+		return var/(taille-1);
 	}
 	double getEcartype(){
 		return Math.sqrt(getVariance());
