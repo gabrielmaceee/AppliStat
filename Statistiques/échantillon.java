@@ -49,6 +49,13 @@ double getMediane() {
 	int m = taille/2;
 	return (donneesTriees[m]+donneesTriees[m+1])/2;
 }
+double getSCT() {
+	double SCT = 0;
+	for (int i =0; i<taille; i++) {
+		SCT += Math.pow((donnees[i] -getMoyenne()),2);
+	}
+	return SCT;
+}
 
 double getQuantiles(int quantile) {};
 
