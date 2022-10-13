@@ -5,7 +5,16 @@ import java.util.Vector;
  */
 public class RegLinMultiple {
 
-    private Vector<Vector<Double>> matrix = new Vector<Vector<Double>>();
+    private Vector<Vector<Double>> matrixDonnees;
+
+    /**
+     * 
+     * TODO: Crée un ctor avec une lecture de fichier json
+     * 
+     */
+    public RegLinMultiple(String filename) {
+
+    }
 
     public double estimateurAchapeau() {
         // TODO: réaliser (X^T*X)^-1 *X^T*Y ou X^T est la matrice transposer X
