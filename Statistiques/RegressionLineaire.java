@@ -5,7 +5,7 @@ Echantillon vd;
 Echantillon vi;
 	
 RegressionLineaire (Echantillon vi, Echantillon vd){
-	if (vi.taille != vd.taille) throw new IllegalArgumentException("Les échantillons doivent être de même taille");
+	if (vi.taille != vd.taille) throw new IllegalArgumentException("Les ï¿½chantillons doivent ï¿½tre de mï¿½me taille");
 	this.vd = vd;
 	this.vi = vi;
 }
@@ -47,7 +47,16 @@ boolean decision() {
 		return true;//vi explique vd
 	return false;
 }
-
+	double[] getYjust(){
+		double[] yjust = new double[vi.taille];
+		int k=0;
+		double beta0=getBeta0(),beta1=getBeta1();
+		for (double i: vi.donnees){
+			yjust[k] = beta1*i+beta0;
+			k++;
+		}
+		return yjust;
+	}
 public static void main(String[] args) {
 	// TODO Auto-generated method stub
 	double [] i = {1,2,3,4};

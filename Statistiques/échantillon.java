@@ -56,6 +56,14 @@ double[] donneesTriees;
 		}
 		return SCT;
 	}
+	double getQuartiles(int quantile) {
+		if(quantile >= 4 ) throw new IllegalArgumentException();
+		if(quantile == 2) return this.getMediane();
+		float q = (float) ((quantile)*(taille+1)/4.0)-1;
+		if(q-((int)q)==0)return donneesTriees[(int)q];
+		int qa = (int)q+1;
+		return donneesTriees[qa];
+	}
 	public String toString() {
 		String s ="";
 		for(int i=0; i<taille; i++) {
