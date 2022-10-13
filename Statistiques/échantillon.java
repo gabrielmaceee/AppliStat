@@ -10,8 +10,6 @@ class echantillon {
 
 	echantillon(double [] TabDonnees) {
 		if(TabDonnees.length ==0) {
-			this.donnees = new double[0];
-			taille = 0;
 			throw new IllegalArgumentException("le tableau est vide");
 		} else { 
 			taille = TabDonnees.length;
