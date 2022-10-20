@@ -69,9 +69,9 @@ double[] donneesTriees;
 		return donneesTriees[0];
 	};
 	double getMediane() {
-		if (taille % 2 ==0) return donneesTriees[taille/2];
+		if (taille % 2 ==1) return donneesTriees[((int)taille/2)];
 		int m = taille/2;
-		return (donneesTriees[m]+donneesTriees[m+1])/2;
+		return (donneesTriees[m-1]+donneesTriees[m])/2;
 	}
 	double getSCT() {
 		double SCT = 0;
@@ -80,13 +80,13 @@ double[] donneesTriees;
 		}
 		return SCT;
 	}
-	double getQuartiles(int quantile) {
-		if(quantile >= 4 ) throw new IllegalArgumentException();
-		if(quantile == 2) return this.getMediane();
-		float q = (float) ((quantile)*(taille+1)/4.0)-1;
-		if(q-((int)q)==0)return donneesTriees[(int)q];
-		int qa = (int)q+1;
-		return donneesTriees[qa];
+	double getQuartiles(int quartile) {
+		if(quartile > 4 ) throw new IllegalArgumentException("really?");
+		if(quartile == 1) return donneesTriees[((int)(taille+3)/4-1)];
+		if(quartile == 3) return donneesTriees[((int)(3*taille+1)/4-1)];
+		if(quartile == 2) return this.getMediane();
+		if(quartile == 4 ) return donneesTriees[taille-1];
+		return donneesTriees[0];
 	}
 	public String toString() {
 		String s ="";
