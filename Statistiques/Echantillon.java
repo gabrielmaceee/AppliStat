@@ -10,6 +10,7 @@ double[] donneesTriees;
 
 
     Echantillon(String s){
+    	if(s == null || s.length()==0) throw new IllegalArgumentException("L'echantillon ne doit pas etre vide");
     	donnees = new double[0];
     	String d = new String();
     	for (int i=0; i<s.length(); i++) {
@@ -69,9 +70,9 @@ double[] donneesTriees;
 		return donneesTriees[0];
 	};
 	double getMediane() {
-		if (taille % 2 ==0) return donneesTriees[taille/2];
+		if (taille % 2 ==1) return donneesTriees[taille/2];
 		int m = taille/2;
-		return (donneesTriees[m]+donneesTriees[m+1])/2;
+		return (donneesTriees[m]+donneesTriees[m-1])/2;
 	}
 	double getSCT() {
 		double SCT = 0;

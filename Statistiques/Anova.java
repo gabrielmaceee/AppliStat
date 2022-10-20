@@ -53,8 +53,11 @@ double getQuantile() {
 	return 0;
 }
 boolean decision() {
-	if (getF()<getQuantile())
+	if (getF()<getQuantile()) {
+		System.out.println("Au seuil 5% on ne rejette pas l'egalite des moyennes");
 		return true;//on rejette pas l'égalité des moyennes
+	}
+	System.out.println("Au seuil 5% on rejette l'egalite des moyennes");//vi explique significativement vd
 	return false;
 }
 

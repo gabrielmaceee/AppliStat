@@ -5,7 +5,7 @@ Echantillon vd;
 Echantillon vi;
 	
 RegressionLineaire (Echantillon vi, Echantillon vd){
-	if (vi.taille != vd.taille) throw new IllegalArgumentException("Les ï¿½chantillons doivent ï¿½tre de mï¿½me taille");
+	if (vi.taille != vd.taille) throw new IllegalArgumentException("Les echantillons doivent etre de meme taille");
 	this.vd = vd;
 	this.vi = vi;
 }
@@ -43,8 +43,14 @@ double getQuantile() {
 	return 0;
 }
 boolean decision() {
-	if (getF()>getQuantile())
-		return true;//vi explique vd
+	if(getR()<0.8) {
+		throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
+	}
+	if (getF()>getQuantile()) {
+		System.out.println("Au seuil 5%, on rejette H0 : x a un effet sur y");
+		return false;
+	}
+	System.out.println("Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
 	return false;
 }
 	double[] getYjust(){
