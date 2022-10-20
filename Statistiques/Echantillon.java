@@ -10,6 +10,7 @@ double[] donneesTriees;
 
 
     Echantillon(String s){
+    	if(s == null || s.length()==0) throw new IllegalArgumentException("L'echantillon ne doit pas etre vide");
     	donnees = new double[0];
     	String d = new String();
     	for (int i=0; i<s.length(); i++) {
