@@ -1,4 +1,4 @@
-package Statiqtiques;
+package Statistiques;
 
 import java.util.*;
 
