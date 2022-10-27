@@ -1,7 +1,8 @@
-package Statistiques;
+package StatTest;
 
 public class Anova {
 Echantillon [] tabEchantillons;
+
 int a;//nombre total d'échantillons
 int t; //taille des échantillons
 int n; //nombre total de données

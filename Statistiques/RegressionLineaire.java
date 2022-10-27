@@ -1,5 +1,4 @@
-package Statistiques;
-
+package StatTest;
 public class RegressionLineaire {
 Echantillon vd;
 Echantillon vi;
@@ -12,7 +11,7 @@ RegressionLineaire (Echantillon vi, Echantillon vd){
 double getCov() {
 	double cov =0;
 	for(int i =0; i<vd.taille; i++) {
-		cov += ((vi.donnees[i]-vi.getMoyenne())*(vd.donnees[i]-vd.getMoyenne()));
+		cov += ((vi.donnees.get(i)-vi.getMoyenne())*(vd.donnees.get(i)-vd.getMoyenne()));
 	}
 	return cov/(vd.taille-1);
 }

@@ -1,49 +1,38 @@
-package Statistiques;
+package StatTest;
 
-import java.util.Arrays;
+import java.util.*;
+
 
 class Echantillon {
 	
-double[] donnees;
+List<Double> donnees;
 int taille;
-double[] donneesTriees;
+List<Double> donneesTriees;
 
 
     Echantillon(String s){
     	if(s == null || s.length()==0) throw new IllegalArgumentException("L'echantillon ne doit pas etre vide");
-    	donnees = new double[0];
-    	String d = new String();
-    	for (int i=0; i<s.length(); i++) {
-    		if(s.charAt(i)== ';')  {
-    			donnees = Arrays.copyOf(donnees, taille+1);
-        		donnees[taille]= Double.parseDouble(d);
-        		taille += 1;
-        		d = "";
-        		i++;
-    		}
-    		else if (i == s.length()-1){
-    			d += s.substring(i, i+1);
-    			donnees = Arrays.copyOf(donnees, taille+1);
-        		donnees[taille]= Double.parseDouble(d);
-        		taille += 1;
-    		}
-    		else d += s.substring(i,i+1);
-    	}
-    	donneesTriees = Arrays.copyOf(donnees, taille);
+		String[] sprim = s.split(";");
+		donnees = new ArrayList<>();
+		for(int i=0;i<sprim.length;i++) donnees.add(Double.valueOf(sprim[i]));
+		instanciationTrie(donnees);
     }
     
     
-	Echantillon(double [] TabDonnees) {
-		if(TabDonnees.length ==0) {
-			throw new IllegalArgumentException("le tableau est vide");
-		} else { 
-			taille = TabDonnees.length;
-			this.donnees = TabDonnees;
-		}	
-		donneesTriees = Arrays.copyOf(donnees,taille);
-		Arrays.sort(donneesTriees);
+	Echantillon(double[] TabDonnees) {
+		if(TabDonnees.length ==0) throw new IllegalArgumentException("le tableau est vide");
+		donnees = new ArrayList<>();
+		for(int i=0;i<TabDonnees.length;i++)this.donnees.add(TabDonnees[i]);
+		instanciationTrie(donnees);
 	}
 	
+	void instanciationTrie(List<Double> tab){
+		donneesTriees = new ArrayList<>(); 
+		taille = tab.size();	
+		donneesTriees.addAll(donnees);
+		Collections.sort(donneesTriees);
+	}
+
 	int getTaille(){
 		return taille;
 	}
@@ -51,14 +40,14 @@ double[] donneesTriees;
 	double getMoyenne(){
 		double moyenne = 0;
 		for(int i = 0; i<taille; i ++) {
-		moyenne += donnees[i];
+		moyenne += donnees.get(i);
 		}
 		return moyenne/taille;
 	}
 	double getVariance(){
 		double var = 0;
 		for(int i = 0; i<taille; i ++) {
-			var += Math.pow((donnees[i]- getMoyenne()),2);
+			var += Math.pow((donnees.get(i)- getMoyenne()),2);
 		}
 		return var/(taille-1);
 	}
@@ -66,37 +55,37 @@ double[] donneesTriees;
 		return Math.sqrt(getVariance());
 	}
 	double getMaximum(){
-		return donneesTriees[taille-1];
+		return donneesTriees.get(taille-1);
 	};
 	
 	double getMinimum() {
-		return donneesTriees[0];
+		return donneesTriees.get(0);
 	};
 	double getMediane() {
-		if (taille % 2 ==1) return donneesTriees[((int)taille/2)];
+		if (taille % 2 ==1) return donneesTriees.get((int)taille/2);
 		int m = taille/2;
-		return (donneesTriees[m-1]+donneesTriees[m])/2;
+		return (donneesTriees.get(m-1)+donneesTriees.get(m/2));
 	}
 	double getSCT() {
 		double SCT = 0;
 		for (int i =0; i<taille; i++) {
-			SCT += Math.pow((donnees[i] -getMoyenne()),2);
+			SCT += Math.pow((donnees.get(i) -getMoyenne()),2);
 		}
 		return SCT;
 	}
 	double getQuartiles(int quartile) {
 		if(quartile > 4 ) throw new IllegalArgumentException("really?");
-		if(quartile == 1) return donneesTriees[((int)(taille+3)/4-1)];
-		if(quartile == 3) return donneesTriees[((int)(3*taille+1)/4-1)];
+		if(quartile == 1) return donneesTriees.get((int)(taille+3)/4-1);
+		if(quartile == 3) return donneesTriees.get((int)(3*taille+1)/4-1);
 		if(quartile == 2) return this.getMediane();
-		if(quartile == 4 ) return donneesTriees[taille-1];
-		return donneesTriees[0];
+		if(quartile == 4 ) return donneesTriees.get(taille-1);
+		return donneesTriees.get(0);
 	}
 	public String toString() {
 		String s ="";
 		for(int i=0; i<taille; i++) {
-			if(i!= taille-1) s += donnees[i] + ", ";
-			else s += donnees[i];
+			if(i!= taille-1) s += donnees.get(i) + ", ";
+			else s += donnees.get(i);
 		}
 		return s;
 	}
