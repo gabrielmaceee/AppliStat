@@ -44,7 +44,7 @@ public class Chi2 {
 			double tabD [] = new double[tailleEchantillons];
 			for(int k = 0; k<tailleEchantillons; k++) {//recherche d'une valeur attendue dans la colonne i et la ligne j
 				tabD[k]= ((sommeColonne[i]*sommeLigne[k])/sommeTotale);
-				if(tabD[k]<5) {throw new IllegalArgumentException("Au moins une valeur theorique est egale � 5");}
+				if(tabD[k]<5) {throw new IllegalArgumentException("Au moins une valeur theorique est egale à 5");}
 				//System.out.println(tabD[k]);
 				}
 			tabAttendues[i]= new Echantillon(tabD);
