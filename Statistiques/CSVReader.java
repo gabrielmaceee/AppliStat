@@ -1,4 +1,4 @@
-package StatTest;
+package Statistiques;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
