@@ -1,3 +1,4 @@
+package Statistiques;
 package StatTest;
 
 public class Chi2 {
@@ -25,9 +26,10 @@ public class Chi2 {
 		double sommeTotale=0;
 		double[] sommeColonne = new double[nbEchantillon];
 		double[] sommeLigne = new double[tailleEchantillons];
+		
 		for(int j=0; j<tailleEchantillons; j++) {
 		   for(int i = 0; i<nbEchantillon; i++) {
-			  sommeLigne[j] += tab[i].donnees.get(j);
+			sommeLigne[j] += tab[i].donnees.get(j);
 		   }
 		}
 		
@@ -60,6 +62,7 @@ public class Chi2 {
 		}
 		return diff;
 	}
+	
 	boolean decision() {	
 		if(getDifference() <= tabCHI2[degreLiberte-1]) {
 			System.out.println("Au seuil 5% nous rejetons l'independance des variables");
