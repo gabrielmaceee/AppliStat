@@ -2,9 +2,9 @@ package Statistiques;
 
 public class Anova {
 Echantillon [] tabEchantillons;
-int a;//nombre total d'échantillons
-int t; //taille des échantillons
-int n; //nombre total de données
+int a;//nombre total d'Ã©chantillons
+int t; //taille des Ã©chantillons
+int n; //nombre total de donnÃ©es
 double [] tabMoyennes;
 double [] tabVariances;
 
@@ -15,7 +15,7 @@ Anova (Echantillon[] tab){
 	tabMoyennes = new double[a];
 	tabVariances = new double [a];
 	for(int i = 0; i<a; i++) {
-		if (tabEchantillons[i].taille != t) throw new IllegalArgumentException("Les échantillons doivent tous être de la même taille");
+		if (tabEchantillons[i].taille != t) throw new IllegalArgumentException("Les Ã©chantillons doivent tous Ãªtre de la mÃªme taille");
 		tabMoyennes[i] = tabEchantillons[i].getMoyenne();
 		tabVariances[i] = tabEchantillons[i].getVariance()*(t-1);
 		n = a*t;
@@ -49,13 +49,11 @@ double getF() {
 	F = (getSCM()/ (a-1))/(getSCE()/(n-a));
 	return F;
 }
-double getQuantile() {
-	return 0;
-}
+
 boolean decision() {
 	if (getF()<getQuantile()) {
 		System.out.println("Au seuil 5% on ne rejette pas l'egalite des moyennes");
-		return true;//on rejette pas l'égalité des moyennes
+		return true;//on rejette pas l'Ã©galitÃ© des moyennes
 	}
 	System.out.println("Au seuil 5% on rejette l'egalite des moyennes");//vi explique significativement vd
 	return false;
