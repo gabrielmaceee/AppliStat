@@ -21,10 +21,11 @@ public class Chi2 {
 	}
 	
 	double getDifference() {
-        Echantillon[] tabAttendues = new Echantillon[nbEchantillon];
+        	Echantillon[] tabAttendues = new Echantillon[nbEchantillon];
 		double sommeTotale=0;
 		double[] sommeColonne = new double[nbEchantillon];
 		double[] sommeLigne = new double[tailleEchantillons];
+		
 		for(int j=0; j<tailleEchantillons; j++) {
 		   for(int i = 0; i<nbEchantillon; i++) {
 			  sommeLigne[j] += tab[i].donnees[j];
@@ -36,7 +37,7 @@ public class Chi2 {
 				  sommeColonne[j] += tab[j].donnees[i];
 			   }
 			   sommeTotale +=sommeColonne[j];
-			}
+		}
 		
 		
 		
@@ -44,9 +45,11 @@ public class Chi2 {
 			double tabD [] = new double[tailleEchantillons];
 			for(int k = 0; k<tailleEchantillons; k++) {//recherche d'une valeur attendue dans la colonne i et la ligne j
 				tabD[k]= ((sommeColonne[i]*sommeLigne[k])/sommeTotale);
-				if(tabD[k]<5) {throw new IllegalArgumentException("Au moins une valeur theorique est egale à 5");}
-				//System.out.println(tabD[k]);
+				if(tabD[k]<5) {
+					throw new IllegalArgumentException("Au moins une valeur theorique est egale Ã  5");
 				}
+				//System.out.println(tabD[k]);
+			}
 			tabAttendues[i]= new Echantillon(tabD);
 		}			
 
@@ -60,14 +63,15 @@ public class Chi2 {
 		}
 		return diff;
 	}
+	
 	boolean decision() {	
 		if(getDifference() <= tabCHI2[degreLiberte-1]) {
 			System.out.println("Au seuil 5% nous rejetons l'independance des variables");
-		return false;
+			return false;
 		}
-	System.out.println("Au seuil 5%, nous ne pouvons pas rejeter l'independance des variables");
-	return true; 
-}
+		System.out.println("Au seuil 5%, nous ne pouvons pas rejeter l'independance des variables");
+		return true; 
+	}
 	
 	
 	
@@ -76,9 +80,9 @@ public class Chi2 {
 		double [] i1 = {10,20,20};
 		double [] i2 = {15,85,100};
 		//double [] i3 = {14, 15, 19, 19, 67};
-	 Echantillon v1 = new Echantillon(i1);
-	 Echantillon v2 = new Echantillon(i2);
-	 //Echantillon v3 = new Echantillon(i3);
+		Echantillon v1 = new Echantillon(i1);
+		Echantillon v2 = new Echantillon(i2);
+		//Echantillon v3 = new Echantillon(i3);
 		Chi2 i =new Chi2(new Echantillon[] {v1, v2/*,v3*/});
 		System.out.println(i.getDifference());
 		i.decision();		 
