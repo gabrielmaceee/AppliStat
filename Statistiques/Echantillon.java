@@ -1,4 +1,4 @@
-package StatTest;
+package Statiqtiques;
 
 import java.util.*;
 
