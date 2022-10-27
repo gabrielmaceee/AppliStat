@@ -1,4 +1,4 @@
-package StatTest;
+package Statistiques;
 
 public class Anova {
 Echantillon [] tabEchantillons;
