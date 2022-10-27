@@ -43,7 +43,10 @@ double[] donneesTriees;
 		donneesTriees = Arrays.copyOf(donnees,taille);
 		Arrays.sort(donneesTriees);
 	}
-
+	
+	int getTaille(){
+		return taille;
+	}
 
 	double getMoyenne(){
 		double moyenne = 0;
