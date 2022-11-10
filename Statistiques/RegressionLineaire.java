@@ -43,7 +43,7 @@ boolean decision() {
 	if(getR()<0.8) {
 		throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
 	}
-	if (getF()>getQuantile()) {
+	if (getF()>CSVReader.getQuantile(1,vd.taille-2)) {
 		System.out.println("Au seuil 5%, on rejette H0 : x a un effet sur y");
 		return true;
 	}
@@ -73,6 +73,7 @@ public static void main(String[] args) {
  System.out.println(test.getBeta0());
  System.out.println(test.getR());
  System.out.println(test.getr());
+ System.out.println(test.decision());
  
 }
 }

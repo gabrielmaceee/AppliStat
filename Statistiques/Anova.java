@@ -1,5 +1,5 @@
 package Statistiques;
-
+import Statistiques.CSVReader;
 public class Anova {
 Echantillon [] tabEchantillons;
 
@@ -46,13 +46,11 @@ double getSCM() {
 }
 
 double getF() {
-	double F = 0;
-	F = (getSCM()/ (a-1))/(getSCE()/(n-a));
-	return F;
+	return (getSCM()/ (a-1))/(getSCE()/(n-a));
 }
 
 boolean decision() {
-	if (getF()<getQuantile()) {
+	if (getF()<CSVReader.getQuantile(a-1,n-a)) {
 		System.out.println("Au seuil 5% on ne rejette pas l'egalite des moyennes");
 		return true;//on rejette pas l'égalité des moyennes
 	}
@@ -82,6 +80,7 @@ public static void main(String[] args) {
  System.out.println(test.getSCE());
  System.out.println(test.getSCM());
  System.out.println(test.getF());
+ System.out.println(test.decision());
  /*for( int i = 0; i<test.n; i++) {
  System.out.println(test.tabMoyennes[i]);
  System.out.println(test.tabVariances[i]);
