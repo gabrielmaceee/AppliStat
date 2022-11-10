@@ -61,6 +61,9 @@ List<Double> donneesTriees;
 	double getMinimum() {
 		return donneesTriees.get(0);
 	};
+	int getFrequnce(double d){
+		return 0;
+	}
 	double getMediane() {
 		if (taille % 2 ==1) return donneesTriees.get((int)taille/2);
 		int m = taille/2;
