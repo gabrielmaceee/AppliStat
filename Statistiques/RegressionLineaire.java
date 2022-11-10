@@ -28,7 +28,7 @@ double getR() {
 	return getr()*getr();
 }
 double getSCM() {
-	return getR()*vd.getSCT();
+	return getR()*vi.getSCT();
 }
 
 double getSCE() {
@@ -45,7 +45,7 @@ boolean decision() {
 	}
 	if (getF()>getQuantile()) {
 		System.out.println("Au seuil 5%, on rejette H0 : x a un effet sur y");
-		return false;
+		return true;
 	}
 	System.out.println("Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
 	return false;
