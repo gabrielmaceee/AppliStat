@@ -1,4 +1,4 @@
-package Statistique;
+package Statistiques;
 public class RegressionLineaire {
 Echantillon vd;
 Echantillon vi;
