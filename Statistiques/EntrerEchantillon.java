@@ -1,23 +1,21 @@
-package Statistiques;
+package com.example.statistique;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.text.Text;
-import javafx.scene.paint.Color;
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 // faire en sorte que l'anova ne prenne pas de nuls
 public class EntrerEchantillon extends Application{
@@ -148,12 +146,12 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()==true) c=1;
-                if(cb2.isSelected()==true) c=2;
-                if(cb3.isSelected()==true) c=3;
-                if(cb3.isSelected()==true) c=4;
-                if(cb3.isSelected()==true) c=5;
-                if(cb3.isSelected()==true) c=6;
+                if(cb1.isSelected()) c=1;
+                if(cb2.isSelected()) c=2;
+                if(cb3.isSelected()) c=3;
+                if(cb3.isSelected()) c=4;
+                if(cb3.isSelected()) c=5;
+                if(cb3.isSelected()) c=6;
 
 
                 ecran.setText(String.valueOf(tabEch[c].getMoyenne()));
@@ -167,36 +165,36 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 ecran.setText("ANOVA=");
                 int c =0;
-                if(cb.isSelected()==true) c++;
-                if(cb1.isSelected()==true) c++;
-                if(cb2.isSelected()==true) c++;
-                if(cb3.isSelected()==true) c++;
-                if(cb4.isSelected()==true) c++;
-                if(cb5.isSelected()==true) c++;
+                if(cb.isSelected()) c++;
+                if(cb1.isSelected()) c++;
+                if(cb2.isSelected()) c++;
+                if(cb3.isSelected()) c++;
+                if(cb4.isSelected()) c++;
+                if(cb5.isSelected()) c++;
                 Echantillon[] echAN = new Echantillon[c];
                 c = 0;
 
-                if(cb.isSelected()==true) {
+                if(cb.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
-                if(cb1.isSelected()==true) {
+                if(cb1.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
-                if(cb2.isSelected()==true) {
+                if(cb2.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
-                if(cb3.isSelected()==true) {
+                if(cb3.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
-                if(cb4.isSelected()==true) {
+                if(cb4.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
-                if(cb5.isSelected()==true) {
+                if(cb5.isSelected()) {
                     echAN[c] = tabEch[c];
                     c++;
                 }
