@@ -1,12 +1,12 @@
-package Statistiques;
+package com.example.statistiques;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVReader {
-    static String csvFile= "C:/Users/8ni8n/OneDrive/Bureau/language de programmation/AppliStat/data/TableauFisher(1).csv";;
-    static String csvSave = "C:/Users/8ni8n/OneDrive/Bureau/language de programmation/AppliStat/data/Save.txt";
+    static String csvFile= "C:/Users/33750/eclipse-workspace/AppliStat/data/TableauFisher(1).csv";
+    static String csvSave = "C:/Users/33750/eclipse-workspace/AppliStat/data/Save.txt/";
     static List<String[]> data=new ArrayList<>();
     static String cvsSplitBy = ",";
 
