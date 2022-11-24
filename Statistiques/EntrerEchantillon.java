@@ -1,5 +1,4 @@
-package Statistiques;
-
+package com.example.statistiques;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
