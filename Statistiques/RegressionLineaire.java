@@ -20,7 +20,7 @@ public class RegressionLineaire {
         return getCov()/vi.getVariance();
     }
     double getBeta0() {
-        return vd.getMoyenne()- (getCov()*vi.getMoyenne());
+        return vd.getMoyenne()- (getBeta1()*vi.getMoyenne());
     }
     double getr() {
         return (getCov()/(Math.sqrt(vi.getVariance()*vd.getVariance())));
