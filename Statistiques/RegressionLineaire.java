@@ -20,7 +20,7 @@ public class RegressionLineaire {
         return getCov()/vi.getVariance();
     }
     double getBeta0() {
-        return vd.getMoyenne()- (getCov()*vi.getMoyenne());
+        return vd.getMoyenne()- (getBeta1()*vi.getMoyenne());
     }
     double getr() {
         return (getCov()/(Math.sqrt(vi.getVariance()*vd.getVariance())));
@@ -41,15 +41,18 @@ public class RegressionLineaire {
     }
 
     String decision() {
+        String s = "H0 = x n'a pas d'effet sur y \nCovariance = " + getCov() +"\nBeta1 = "+getBeta1()+"\nBeta0 = "+ getBeta0()+"\nr = "+ getr() + "\nR² = "+getR()+"\n";
+
         if(getR()<0.8) {
-            return ("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
+            return (s+"Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
            // throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
         }
+        s += "SCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ CSVReader.getQuantile(1,vd.taille-2)+"\n";
         if (getF()>CSVReader.getQuantile(1,vd.taille-2)) {
-            return("Au seuil 5%, on rejette H0 : x a un effet sur y");
+            return(s+ "Au seuil 5%, on rejette H0 : x a un effet sur y");
            // return true;
         }
-        return("Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
+        return(s+"Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
         //return false;
     }
     double[] getYjust(){
@@ -65,18 +68,18 @@ public class RegressionLineaire {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         double [] i = {1,2,3,4};
-        double [] d = {2,4,6,8};
+        double [] d = {3,5,7,8};
         Echantillon vd = new Echantillon(d);
         Echantillon vi = new Echantillon(i);
 
 
         try {
             RegressionLineaire test = new RegressionLineaire(vi,vd);
-            System.out.println("cov="+test.getCov());
+           /* System.out.println("cov="+test.getCov());
             System.out.println(test.getBeta1());
             System.out.println(test.getBeta0());
             System.out.println(test.getR());
-            System.out.println(test.getr());
+            System.out.println(test.getr());*/
             System.out.println(test.decision());
         }
         catch (ExceptionTailleEchantillon et){

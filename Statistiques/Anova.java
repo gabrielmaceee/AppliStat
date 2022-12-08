@@ -55,11 +55,12 @@ public class Anova{
     }
 
     String decision() {
+        String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ CSVReader.getQuantile(a-1,n-a)+"\n";
         if (getF()<CSVReader.getQuantile(a-1,n-a)) {
-            return ("Au seuil 5% on ne rejette pas l'egalite des moyennes");
+            return (s +"Au seuil 5% on ne rejette pas H0");
             //return true;//on rejette pas l'égalité des moyennes
         }
-        return ("Au seuil 5% on rejette l'egalite des moyennes");//vi explique significativement vd
+        return ( s+"Au seuil 5% on rejette H0");//vi explique significativement vd
         //return false;
     }
 
@@ -81,9 +82,9 @@ public class Anova{
 
         try {
             Anova test = new Anova(new Echantillon[]{v1, v2, v3});
-            System.out.println(test.getSCE());
+           /* System.out.println(test.getSCE());
             System.out.println(test.getSCM());
-            System.out.println(test.getF());
+            System.out.println(test.getF());*/
             System.out.println(test.decision());
         } catch (ExceptionNombreEchantillons en){
             System.out.println(en.getMessage());
