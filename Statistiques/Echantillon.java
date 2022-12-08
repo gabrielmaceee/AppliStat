@@ -12,15 +12,17 @@ class Echantillon {
 
     Echantillon(String s) throws ExceptionDonneesEntree{
 
-            if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
+        if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
 
                 String[] sprim = s.split(";");
                 donnees = new ArrayList<>();
                 for (int i = 0; i < sprim.length; i++) {
                     //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
                     try {
-                        donnees.add(Double.valueOf(sprim[i]));
-                    } catch (Exception e) {
+                       double c = Double.valueOf(sprim[i]);
+                        donnees.add(c);
+                    }catch (Exception e) {
+                        //System.out.println(e.getMessage());
                         throw new ExceptionDonneesEntree();
                     }
                 }
