@@ -113,6 +113,12 @@ public class EntrerEchantillon extends Application{
         grid2.setHgap(10);
         grid2.setVgap(10);
         grid2.add(t2,0,0);
+        int numeroEchantillon = 0;
+        for (int i = 0; i <= 5 ; i++) {
+
+        }
+
+
         CheckBox cb = new CheckBox("Echantillon 1");
         grid2.add(cb, 0,1);
         cb.setVisible(false);
@@ -498,7 +504,9 @@ public class EntrerEchantillon extends Application{
                     actiontarget.setText(new String("La fréquence doit être celle d'un nombre"));
                 }
             }
-        });btnquartile.setOnAction(new EventHandler<ActionEvent>() {
+        });
+
+        btnquartile.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;

@@ -1,99 +1,99 @@
-package com.example.statistiques;
+package fr.statface.Statistiques;
 
 import java.util.*;
 
-
-class Echantillon {
+public class Echantillon {
 
     List<Double> donnees;
     int taille;
     List<Double> donneesTriees;
 
 
-    Echantillon(String s) throws ExceptionDonneesEntree{
+    public Echantillon(String s) throws ExceptionDonneesEntree{
 
         if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
 
                 String[] sprim = s.split(";");
                 donnees = new ArrayList<>();
-                for (int i = 0; i < sprim.length; i++) {
-                    //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
-                    try {
-                       double c = Double.valueOf(sprim[i]);
-                        donnees.add(c);
-                    } catch (Exception e) {
-                        //System.out.println(e.getMessage());
-                        throw new ExceptionDonneesEntree();
-                    }
-                }
+        for (String value : sprim) {
+            //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
+            try {
+                double c = Double.parseDouble(value);
+                donnees.add(c);
+            } catch (Exception e) {
+                //System.out.println(e.getMessage());
+                throw new ExceptionDonneesEntree();
+            }
+        }
                 instanciationTrie(donnees);
     }
 
 
-    Echantillon(double[] TabDonnees) {
+    public Echantillon(double[] TabDonnees) {
         if(TabDonnees.length ==0) throw new IllegalArgumentException("le tableau est vide");
         donnees = new ArrayList<>();
-        for(int i=0;i<TabDonnees.length;i++)this.donnees.add(TabDonnees[i]);
+        for (double tabDonnee : TabDonnees) this.donnees.add(tabDonnee);
         instanciationTrie(donnees);
     }
 
-    void instanciationTrie(List<Double> tab){
+    public void instanciationTrie(List<Double> tab){
         donneesTriees = new ArrayList<>();
         taille = tab.size();
         donneesTriees.addAll(donnees);
         Collections.sort(donneesTriees);
     }
 
-    int getTaille(){
+    public int getTaille(){
         return taille;
     }
 
-    double getMoyenne(){
+    public double getMoyenne(){
         double moyenne = 0;
         for(int i = 0; i<taille; i ++) {
             moyenne += donnees.get(i);
         }
         return moyenne/taille;
     }
-    double getVariance(){
+    public double getVariance(){
         double var = 0;
         for(int i = 0; i<taille; i ++) {
             var += Math.pow((donnees.get(i)- getMoyenne()),2);
         }
         return var/(taille-1);
     }
-    double getEcarttype(){
+    public double getEcarttype(){
         return Math.sqrt(getVariance());
     }
-    double getMaximum(){
+    public double getMaximum(){
         return donneesTriees.get(taille-1);
-    };
+    }
 
-    double getMinimum() {
+    public double getMinimum() {
         return donneesTriees.get(0);
-    };
-    int getFrequence(double d){
+    }
+    public int getFrequence(double d){
         int c =0;
         for(int i = 0; i<taille; i++){
            if(d == (donnees.get(i))) c++;
         }
         return c;
     }
-    double getMediane() {
+
+    public double getMediane() {
         if (taille % 2 ==1) return donneesTriees.get(taille/2);
         int m = taille/2 -1;
         if(m<0) return donneesTriees.get(0);
         if(m==0) return (donneesTriees.get(0)+donneesTriees.get(1))/2;
         return ((donneesTriees.get(m)+donneesTriees.get(m+1))/2);
     }
-    double getSCT() {
+    public double getSCT() {
         double SCT = 0;
         for (int i =0; i<taille; i++) {
             SCT += Math.pow((donnees.get(i) -getMoyenne()),2);
         }
         return SCT;
     }
-    double getQuartiles(int quartile) {
+    public double getQuartiles(int quartile) {
         double result = 0;
         float b;
         float a = b = 0;
