@@ -20,11 +20,9 @@ class Echantillon {
                     //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
                     try {
                         donnees.add(Double.valueOf(sprim[i]));
-                    }
-                    finally {
+                    } catch (Exception e) {
                         throw new ExceptionDonneesEntree();
                     }
-
                 }
                 instanciationTrie(donnees);
     }
