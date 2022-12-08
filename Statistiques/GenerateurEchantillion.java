@@ -13,6 +13,9 @@ public class GenerateurEchantillion {
     }
 
     public GenerateurEchantillion(int size, int limit) {
+        if (size < 0) {
+            throw new IllegalArgumentException("Pas de taille négative");
+        }
         ls = new Vector<>(size);
         for (int i = 0; i < size; i++) {
             ls.add(rdm.nextDouble(limit+1));
