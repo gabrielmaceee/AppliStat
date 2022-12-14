@@ -11,6 +11,11 @@ public class GenerateurEchantillion {
         this(50,30);
     }
 
+    /**
+     * Construit un échantillon qui sert pour alimenter l'interface
+     * @param size taille échantillion entier positif
+     * @param limit  entier
+     */
     public GenerateurEchantillion(int size, int limit) {
         if (size < 0) {
             throw new IllegalArgumentException("Pas de taille négative");
@@ -22,7 +27,9 @@ public class GenerateurEchantillion {
     }
 
 
-
+    /**
+     * @return les nombres de la liste séparée par virgule
+     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
