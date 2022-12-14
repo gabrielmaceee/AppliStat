@@ -354,7 +354,7 @@ public class EntrerEchantillon extends Application{
             StringBuilder sb = new StringBuilder();
             for (CheckBox cbx: lsCheckBoxes) {
                 if (cbx.isSelected()){
-                    sb.append("moyenne echantillon ")
+                    sb.append("La moyenne de l'échantillon ")
                             .append(c+1)
                             .append(" : ")
                             .append(tabEch[c].getMoyenne())
@@ -370,7 +370,7 @@ public class EntrerEchantillon extends Application{
             StringBuilder sb = new StringBuilder();
             for (CheckBox cbx: lsCheckBoxes) {
                 if (cbx.isSelected()){
-                    sb.append("moyenne echantillon ")
+                    sb.append("La médiane de l'échantillon ")
                             .append(c+1)
                             .append(" : ")
                             .append(tabEch[c].getMediane())
