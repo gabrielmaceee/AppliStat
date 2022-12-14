@@ -1,5 +1,4 @@
-package fr.statface.Statistiques;
-
+package com.example.statistiques;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;

@@ -44,9 +44,8 @@ public class Anova{
         }
         moyenneTotale /= a;
         for(int i = 0; i<a; i ++) {
-            SCM += t*Math.pow((tabEchantillons[i].getMoyenne()-moyenneTotale),2);
+            SCM += t*Math.pow((tabMoyennes[i]-moyenneTotale),2);
         }
-
         return SCM;
     }
 

@@ -1,23 +1,27 @@
 package com.example.statistiques;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import static jdk.jfr.consumer.EventStream.openFile;
 
-// faire en sorte que l'anova ne prenne pas de nuls
 public class EntrerEchantillon extends Application{
     Echantillon[] tabEch = new Echantillon[12];
     int compteur = 0;
@@ -55,9 +59,10 @@ public class EntrerEchantillon extends Application{
         entree.setMaxSize(400,150);
         TextArea ecran = new TextArea();
         ecran.setMaxSize(400, 150);
+        ecran.setEditable(false);
         Label t = new Label("Syntaxe : 'nombre'+';'");
         Label res = new Label("Résultats : ");
-        Label t1 = new Label("Partie théorique");
+        Label t1 = new Label("Partie théorique : ");
         Label t2 = new Label("Vos échantillons : ");
         Label t3 = new Label("Un seul échantillon :");
         t3.setTextFill(Color.BLUE);
@@ -102,12 +107,16 @@ public class EntrerEchantillon extends Application{
         GridPane grid1 = new GridPane();
         grid1.setHgap(10);
         grid1.setVgap(10);
-        Button btn1 = new Button("Lien");
-        HBox hbBtn1 = new HBox(10);
-        hbBtn1.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn1.getChildren().add(btn1);
-        grid1.add(hbBtn1, 1, 0);
+        Button btnTest = new Button("Les tests statistiques");
+        Button btnCRL = new Button("Régresion linéaire");
+        Button btnCAnova = new Button("Test d'Anova");
+        Button btnCChi2 = new Button("Test d'indépendance du Chi2");
         grid1.add(t1, 0,0);
+        grid1.add(btnTest, 0, 1);
+        grid1.add(btnCRL, 1, 1);
+        grid1.add(btnCAnova, 0, 2);
+        grid1.add(btnCChi2, 1, 2);
+
 
         GridPane grid2 = new GridPane();
         grid2.setHgap(10);
@@ -212,6 +221,10 @@ public class EntrerEchantillon extends Application{
         gridRL.add(btnAnova,0,2);
         gridRL.add(btnchi2, 0, 3);
 
+
+        GridPane gridGraph1 = new GridPane();
+        Button btnGraph1 = new Button("Graph 1");
+        gridGraph1.add(btnGraph1,0,0);
 
         GridPane grid4 = new GridPane();
         grid4.setHgap(10);
@@ -749,8 +762,172 @@ public class EntrerEchantillon extends Application{
                 }
             }
         });
+
+        btnTest.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e){
+            Stage stage = new Stage();
+            stage.setTitle("Les tests statistiques");
+            GridPane gpts = new GridPane();
+            Label lblTest = new Label("Les tests statisitques");
+            lblTest.setAlignment(Pos.CENTER);
+            String s = "Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,\n" +
+                    " dite nulle, en fonction d’échantillons donnés.\n"+
+               "Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%\n"+
+                "        Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.\n"+
+                "Pour cela il faut :\n"+
+                "-	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience\n" +
+                    " (par exemple l’égalités de moyennes ou de variance), H1 est son contraire \n" +
+                    "(soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.\n"+
+                    "-	 Récupérer des données\n"+
+                "-	Choisir un type de test\n"+
+                "-	Analyser les résultats : récup d’une valeur, comparaison avec les tables";
+
+                TextArea taTest = new TextArea(s);
+                taTest.setEditable(false);
+                taTest.setMinSize(700,280);
+            gpts.add(lblTest,0,0);
+            gpts.add(taTest,0,1);
+            Scene scene  = new Scene(gpts,750,300);
+            stage.setScene(scene);
+            stage.show();
+        }});
+        btnCRL.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e){
+                Stage stage = new Stage();
+                stage.setTitle("Les tests statistiques");
+                GridPane gpCRL = new GridPane();
+                Label lblCRL = new Label("Test de régression linéaire");
+                lblCRL.setAlignment(Pos.CENTER);
+                String s = "Ce test permet de tester un éventuel effet d’une variable explicative x sur une variable expliquée y.\n" +
+                        "H0 : x n’influence pas y\n" +
+                        "Notation des indices de degré de liberté : a=nombre d’échantillons (=2) ; n = la taille des échantillons\n" +
+                        "Etapes / Détail calcul :\n" +
+                        "Calculs des moyennes, variances des deux échantillons, covariance, sct(x)\n" +
+                        "SCT : ∑(Xi-Xmoy)²\n" +
+                        "Calcul de l’équation de la droite des moindres carrés y=B1*x+B0 (obtenue à part des données empirique de x et de y)\n" +
+                        "B1 : cov(x,y)/var(x)\n" +
+                        "B0 : moyenne(y) – B1*moyenne(x)\n" +
+                        "Calcul de la corrélation entre le modèle et les valeurs empiriques de y, par le coefficient de corrélation linéaire r\n"+
+                        "R = r² = pourcentage de variance expliquée par le modèle\n" +
+                        "Conditions : si R<0.8 : on ne peut pas tester ni rejeter H0.\n" +
+                        "r : cov/(√ (var(x)*var(y)) \n" +
+                        "R=r²\n" +
+                        "Calcul de l’indice de Fischer F :\n" +
+                        "SCM : R * SCT(x) ou ∑(moyenne(i)-moyenne tt) ²\n" +
+                        "SCE : SCT(x)-SCM ou ∑ (Yi -Yi estimé) ²\n" +
+                        "F : (SCM*taille-2) /SCE\n" +
+                        "Puis récupération du quantile théorique en fonction des degrés de liberté d’une loi de Fischer : a-1, n -2.\n" +
+                        "Comparaison de F et du quantile théorique (1, n-2) : Si  F > au quantile : On rejette H0 : x a un effet sur y, sinon one ne rejette pas H0.\n";
+                TextArea taCRL = new TextArea(s);
+                taCRL.setEditable(false);
+                taCRL.setMinSize(730,380);
+                gpCRL.add(lblCRL, 0,0);
+                gpCRL.add(taCRL, 0, 1);
+                Scene scene  = new Scene(gpCRL,750,400);
+                stage.setScene(scene);
+                stage.show();
+            }});
+        btnCAnova.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e){
+                Stage stage = new Stage();
+                stage.setTitle("Les tests statistiques");
+                GridPane gpCA = new GridPane();
+                Label lblCA = new Label("Test d'anova à un facteur");
+                lblCA.setAlignment(Pos.CENTER);
+                String s = "Test d’anova à un facteur : Quoi, pourquoi, H0, étapes, conditions\n" +
+                        "Ce test permet de tester l’égalité des moyennes d’un groupe d’échantillons.\n" +
+                        "H0 : égalité des moyennes, H1 : non. Il s’agit donc d’un test bilatéral \n" +
+                        "Etapes :\n" +
+                        "Calcul variance et moyenne de chaque échantillon\n" +
+                        "Notation des indices de degré de liberté : a=nombre d’échantillons ;\n" +
+                        "t = taille des échantillons ; n = nombre total de valeurs : a*t\n" +
+                        "Détail calcul : \n" +
+                        "Calcul de l’indice de Ficher F :\n" +
+                        "SCE : somme des variances\n" +
+                        "SCM : t * ∑(moyenne(i)-moyenne tt) ²\n" +
+                        "F : (SCM /(a-1))/(SCE/(n-a))\n" +
+                        "Comparaison de F et du quantile théorique(a-1,n-a) : \n" +
+                        "Si F est < au quantile : On ne rejette pas H0 :  égalité des moyennes\n";
+                TextArea taTest = new TextArea(s);
+                taTest.setEditable(false);
+                taTest.setMinSize(700,280);
+                gpCA.add(lblCA, 0,0);
+                gpCA.add(taTest, 0, 1);
+                Scene scene  = new Scene(gpCA,750,300);
+                stage.setScene(scene);
+                stage.show();
+            }});
+        btnCChi2.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e){
+                Stage stage = new Stage();
+                stage.setTitle("Les tests statistiques");
+                GridPane gpCC = new GridPane();
+                Label lblCC = new Label("Test du Chi2 d'indépendance");
+                lblCC.setAlignment(Pos.CENTER);
+                String s = "Ce test permet de vérifier l’indépendance entre deux variables X et Y,\n" +
+                        " c’est-à-dire  de vérifier qu’il n’existe pas de lien statistique entre ces deux variables.\n" +
+                        "X représente une catégorie de la population, et Y un critère en particulier.\n" +
+                        "H0 : pas de lien, H1 : lien. Entre d’autres termes, sous H0, la catégorie n’influence pas le critère.\n" +
+                        "Il s’agit donc d’un test bilatéral.\n" +
+                        "Etapes :\n" +
+                        "Entrée les valeurs empiriques dans une table de contingence\n" +
+                        "Calcul des valeurs théoriques s’il y avait indépendance :\n" +
+                        "Calcul des valeurs théoriques : Pour chaque ligne de chaque colonne : total ligne * total colonne / somme total\n" +
+                        "Conditions : - Les valeurs théoriques doivent toutes être >=1,\n" +
+                        "                      - 80% des valeurs théoriques doivent être >=5.\n" +
+                        "\n" +
+                        "Puis calcul de la distance avec les valeurs empiriques :\n" +
+                        "Calcul de la distance d = ∑ (i = 0 à n) (val empirique(i) – val théorique(i)) ²/ val théorique(i)\n" +
+                        "La distance suit asymptotiquement une loi de chi2 à (i-1)*(j-1) degré de liberté,\n" +
+                        " où i = le nombre échantillons (2) et j  le nombre de valeurs par échantillons.\n" +
+                        "\n" +
+                        "Comparaison de d et de la valeur théorique de la table du chi2 à (1, n-1) : \n" +
+                        "Si d <= valeur théorique chi2 : On rejette H0 : X et Y ne sont pas indépendants.\n";
+                TextArea taCC = new TextArea(s);
+                taCC.setEditable(false);
+                taCC.setMinSize(700,380);
+                gpCC.add(lblCC, 0,0);
+                gpCC.add(taCC, 0, 1);
+                Scene scene  = new Scene(gpCC,750,400);
+                stage.setScene(scene);
+                stage.show();
+            }});
+        btn4.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                Stage stage = new Stage();
+                stage.setTitle("Bar Chart Sample");
+                final NumberAxis xAxis = new NumberAxis();
+                final NumberAxis yAxis = new NumberAxis();
+                final ScatterChart<Number,Number> bc =
+                        new ScatterChart<Number, Number>(xAxis,yAxis);
+                bc.setTitle("Nuage de points");
+                xAxis.setLabel("X");
+                yAxis.setLabel("Y");
+                ArrayList<Double> dl = new ArrayList<>();
+                XYChart.Series<Number,Number> series1 = new XYChart.Series<Number,Number>();
+                Random random = new Random();
+                for(int i=0;i<20000;i++){
+                    dl.add(random.nextGaussian());
+                }
+                Collections.sort(dl);
+                for(int k=0;k<20000;k++) {
+                    series1.getData().add(new XYChart.Data(k,dl.get(k)));
+                }
+
+
+                bc.getData().addAll(series1);
+                final DropShadow shadow = new DropShadow();
+                shadow.setOffsetX(2);
+                shadow.setColor(Color.GREY);
+                Scene scene  = new Scene(bc,800,600);
+                bc.setEffect(shadow);
+                stage.setScene(scene);
+                stage.show();
+            }});
         //primaryStage.sizeToScene();
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
     public static void main(String[] args) {
