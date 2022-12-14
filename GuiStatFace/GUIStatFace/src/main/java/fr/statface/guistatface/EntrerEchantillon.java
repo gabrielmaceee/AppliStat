@@ -321,19 +321,7 @@ public class EntrerEchantillon extends Application{
                 idx++;
             }
 
-            /*
-            if(cb1.isSelected()) c=1;
-            if(cb2.isSelected()) c=2;
-            if(cb3.isSelected()) c=3;
-            if(cb4.isSelected()) c=4;
-            if(cb5.isSelected()) c=5;
-            if(cb6.isSelected()) c=6;
-            if(cb7.isSelected()) c=7;
-            if(cb8.isSelected()) c=8;
-            if(cb9.isSelected()) c=9;
-            if(cb10.isSelected()) c=10;
-            if(cb11.isSelected()) c=11;
-            */
+
 
 
         });
@@ -467,7 +455,7 @@ public class EntrerEchantillon extends Application{
             StringBuilder sb = new StringBuilder();
             for (CheckBox cbx: lsCheckBoxes) {
                 if (cbx.isSelected()){
-                    sb.append("Taille echantillon ")
+                    sb.append("Taille échantillon ")
                             .append(c+1)
                             .append(" : ")
                             .append(tabEch[c].getTaille())
