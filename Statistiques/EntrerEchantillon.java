@@ -119,7 +119,13 @@ public class EntrerEchantillon extends Application{
         grid1.add(btnCAnova, 0, 2);
         grid1.add(btnCChi2, 1, 2);
 
-
+        Button QCM = new Button("QCM");
+        GridPane gridQCM = new GridPane();
+        gridQCM.add(QCM,0,0);
+        gridQCM.setHgap(10);
+        gridQCM.setVgap(10);
+        QCM.setAlignment(Pos.CENTER);
+        
         GridPane grid2 = new GridPane();
         grid2.setHgap(10);
         grid2.setVgap(10);
@@ -223,7 +229,8 @@ public class EntrerEchantillon extends Application{
         grid4.add(hbBtn4, 0, 1);
         grid4.add(t4,0,0);
 
-        grid1.setAlignment(Pos.TOP_CENTER);
+        grid1.setAlignment(Pos.TOP_CENTER);                         
+        gridQCM.setAlignment(Pos.CENTER);
         grid.setAlignment(Pos.CENTER);
         gridecran.setAlignment(Pos.TOP_CENTER);
         grid2.setAlignment(Pos.CENTER);
@@ -234,6 +241,7 @@ public class EntrerEchantillon extends Application{
         gridecran.setAlignment(Pos.CENTER);
 
         gp.add(grid1,1,0);
+        gp.add(gridQCM,2,0);
         gp.addRow(1,grid2,grid, grid3);
         gp.addRow(2, gpech, gridecran,gridRL);
         gp.add(grid4,1,3);
@@ -755,6 +763,13 @@ public class EntrerEchantillon extends Application{
                 stage.show();
                 stage2.show();
 
+            }});
+                  QCM.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                QCM ex = new QCM();
+                Stage stageQCM = new Stage();
+                ex.start(stageQCM);
             }});
         //primaryStage.sizeToScene();
         //primaryStage.setFullScreen(true);
