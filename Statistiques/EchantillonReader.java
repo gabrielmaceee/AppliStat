@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

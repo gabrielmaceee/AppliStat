@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 
 import java.io.*;
 import java.nio.file.Path;

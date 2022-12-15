@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -23,6 +23,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class EntrerEchantillon extends Application{
     Echantillon[] tabEch = new Echantillon[12];
@@ -344,7 +345,7 @@ public class EntrerEchantillon extends Application{
                 StringBuilder bf = new StringBuilder();
                 for (CheckBox cbx: tabBtn) {
                     if (cbx.isSelected()){
-                        bf.append("Echantillon ").append(c+1).append(" : ").append(tabEch[c].toString()).append("\n");
+                        bf.append("Echantillon ").append(c).append(" : ").append(tabEch[c].toString()).append("\n");
                     }
                     c++;
                 }

@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 
 public class RegressionLineaire {
     Echantillon vd;
@@ -67,8 +67,8 @@ public class RegressionLineaire {
     }
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        double [] i = {1,2,3,4};
-        double [] d = {3,5,7,8};
+        double [] i = {1.70,2,1.65,1.35,1.76,1.90,1.74,1.76};
+        double [] d = {64,90,63,42,70,85,66,68};
         Echantillon vd = new Echantillon(d);
         Echantillon vi = new Echantillon(i);
 

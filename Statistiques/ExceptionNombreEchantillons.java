@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 
 public class ExceptionNombreEchantillons extends Exception{
     public ExceptionNombreEchantillons() {

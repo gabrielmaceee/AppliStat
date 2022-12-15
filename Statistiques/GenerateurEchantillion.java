@@ -1,4 +1,4 @@
-package com.example.statistique;
+package com.example.statistiques;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
