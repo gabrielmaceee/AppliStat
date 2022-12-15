@@ -333,32 +333,32 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
+                StringBuilder bf = new StringBuilder();
+                for (CheckBox cbx: tabBtn) {
+                    if (cbx.isSelected()){
+                        bf.append("Echantillon ").append(c+1).append(" : ").append(tabEch[c].toString()).append("\n");
+                    }
+                    c++;
+                }
+                if (bf.isEmpty()) {
+                    actiontarget.setFill(Color.RED);
+                    actiontarget.setText("Affichage impossible :Aucun échantillon existant ou sélectionné");
+                } else {
+                    ecran.setText(bf.toString());
+                }
+            }
+        });
+        btnMoy.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                int c = 0;
                 for(int i = 0;i<12;i++ ){
                     if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
                 }
-                ecran.setText(tabEch[c].toString());
-            }
-        });
-        btnMoy.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                int c = 1;
-                StringBuilder bf = new StringBuilder();
-                for (CheckBox cbx: tabBtn) {
-                    if (cbx.isSelected()){
-                        bf.append("Echantillon ").append(c).append(" : ").append(tabEch[c].toString()).append("\n");
-                    }
-                    c++;
-                }
-                if (bf.isEmpty()) {
-                    actiontarget.setFill(Color.RED);
-                    actiontarget.setText("Affichage impossible :Aucun échantillon existant");
-                } else {
-                    ecran.setText(bf.toString());
-                }
+                ecran.setText(String.valueOf(tabEch[c].getMoyenne()));
             }
         }); btnMediane.setOnAction(new EventHandler<ActionEvent>() {
             @Override
