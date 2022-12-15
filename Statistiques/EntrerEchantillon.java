@@ -345,14 +345,20 @@ public class EntrerEchantillon extends Application{
         btnMoy.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                int c = 0;
-                for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()) {
-                        c = i;
-                        break;
+                int c = 1;
+                StringBuilder bf = new StringBuilder();
+                for (CheckBox cbx: tabBtn) {
+                    if (cbx.isSelected()){
+                        bf.append("Echantillon ").append(c).append(" : ").append(tabEch[c].toString()).append("\n");
                     }
+                    c++;
                 }
-                ecran.setText(String.valueOf(tabEch[c].getMoyenne()));
+                if (bf.isEmpty()) {
+                    actiontarget.setFill(Color.RED);
+                    actiontarget.setText("Affichage impossible :Aucun échantillon existant");
+                } else {
+                    ecran.setText(bf.toString());
+                }
             }
         }); btnMediane.setOnAction(new EventHandler<ActionEvent>() {
             @Override
