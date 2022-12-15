@@ -1,4 +1,4 @@
-package com.example.statistiques;
+package com.example.statistique;
 
 public class TestNormalite {
     Echantillon e;
@@ -49,8 +49,7 @@ public class TestNormalite {
         else if (taille < 50) pvalue = 0.067;
         else if (taille < 70) pvalue = 0.062;
 
-        if (getJB() < pvalue) return true; //on rejette pas H0 : les donn�es suivent bien une loi normale
-        return false;
+        return getJB() < pvalue; //on ne rejette pas H0 : les donn�es suivent bien une loi normale
     }
 
     public static void main(String[] args) {

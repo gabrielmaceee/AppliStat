@@ -1,4 +1,4 @@
-package com.example.statistiques;
+package com.example.statistique;
 
 public class ExceptionDonneesEntree extends Exception{
     public ExceptionDonneesEntree(){

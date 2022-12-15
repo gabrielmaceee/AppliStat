@@ -1,4 +1,4 @@
-package com.example.statistiques;
+package com.example.statistique;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -32,6 +32,6 @@ public class GenerateurEchantillion {
 
     public static void main(String[] args) {
         GenerateurEchantillion genE = new GenerateurEchantillion();
-        System.out.println(genE.toString());
+        System.out.println(genE);
     }
 }

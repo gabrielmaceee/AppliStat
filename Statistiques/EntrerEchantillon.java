@@ -1,4 +1,5 @@
 package com.example.statistique;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,25 +9,25 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
-import static jdk.jfr.consumer.EventStream.openFile;
+import java.io.File;
 
 public class EntrerEchantillon extends Application{
     Echantillon[] tabEch = new Echantillon[12];
     int compteur = 0;
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage)  {
         primaryStage.setTitle("Coucou");
 
         GridPane gp =new GridPane();
@@ -168,12 +169,14 @@ public class EntrerEchantillon extends Application{
         GridPane grid3 = new GridPane();
         grid3.setHgap(10);
         grid3.setVgap(10);
-        Label regle = new Label("Pour créer un échantillon à l'écrit:\n La syntaxe à respectée est de séparer chaque nombre par un';'\n" +
-                "Vous pouvez faire des retours et des espaces à la ligne quand vous voulez \n" +
-                "Pour la description d'un échantillon :\n" +
-                "Si vous avez séléctionné plusieurs échantillons : Seul le dernier séléctionné sera pris en compte\n"+
-                "Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons\n" +
-                "Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2");
+        Label regle = new Label("""
+                Pour créer un échantillon à l'écrit:
+                 La syntaxe à respectée est de séparer chaque nombre par un';'
+                Vous pouvez faire des retours et des espaces à la ligne quand vous voulez\s
+                Pour la description d'un échantillon :
+                Si vous avez séléctionné plusieurs échantillons : Seul le dernier séléctionné sera pris en compte
+                Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons
+                Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2""");
         grid3.add(regle,0,0);
 
 
@@ -236,7 +239,7 @@ public class EntrerEchantillon extends Application{
                 try {
                     if(compteur == 12) {
                         actiontarget.setFill(Color.GREEN);
-                        actiontarget.setText(new String(("Plus de place,pour un nouvel échantillon")));
+                        actiontarget.setText("Plus de place,pour un nouvel échantillon");
                     }else {
                         tabEch[compteur] = new Echantillon(entree.getText());
                         tabBtn[compteur].setVisible(true);
@@ -252,7 +255,7 @@ public class EntrerEchantillon extends Application{
                 }
                 catch(ExceptionDonneesEntree de){
                     actiontarget.setFill(Color.RED);
-                    actiontarget.setText(new String("L'échantillon " + (compteur+1) + " n'a pas pu être créé :\n"+ de.getMessage()));
+                    actiontarget.setText("L'échantillon " + (compteur+1) + " n'a pas pu être créé :\n"+ de.getMessage());
                 }
             }
         });
@@ -437,7 +440,7 @@ public class EntrerEchantillon extends Application{
                 }
                 catch(Exception def){
                     actiontarget.setFill(Color.RED);
-                    actiontarget.setText(new String("La fréquence doit être celle d'un nombre"));
+                    actiontarget.setText("La fréquence doit être celle d'un nombre");
                 }
             }
         });btnquartile.setOnAction(new EventHandler<ActionEvent>() {
@@ -454,7 +457,7 @@ public class EntrerEchantillon extends Application{
                     ecran.setText(String.valueOf(tabEch[c].getQuartiles(Integer.parseInt(entree.getText()))));
                 }catch(Exception def){
                     actiontarget.setFill(Color.RED);
-                    actiontarget.setText(new String("Entrer le quartile à calculer"));
+                    actiontarget.setText("Entrer le quartile à calculer");
                 }
             }
         });
@@ -540,17 +543,18 @@ public class EntrerEchantillon extends Application{
                 GridPane gpts = new GridPane();
                 Label lblTest = new Label("Les tests statisitques");
                 lblTest.setAlignment(Pos.CENTER);
-                String s = "Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,\n" +
-                        " dite nulle, en fonction d’échantillons donnés.\n"+
-                        "Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%\n"+
-                        "        Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.\n"+
-                        "Pour cela il faut :\n"+
-                        "-	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience\n" +
-                        " (par exemple l’égalités de moyennes ou de variance), H1 est son contraire \n" +
-                        "(soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.\n"+
-                        "-	 Récupérer des données\n"+
-                        "-	Choisir un type de test\n"+
-                        "-	Analyser les résultats : récup d’une valeur, comparaison avec les tables";
+                String s = """
+                        Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,
+                         dite nulle, en fonction d’échantillons donnés.
+                        Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%
+                                Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.
+                        Pour cela il faut :
+                        -	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience
+                         (par exemple l’égalités de moyennes ou de variance), H1 est son contraire\s
+                        (soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.
+                        -	 Récupérer des données
+                        -	Choisir un type de test
+                        -	Analyser les résultats : récup d’une valeur, comparaison avec les tables""";
 
                 TextArea taTest = new TextArea(s);
                 taTest.setEditable(false);
@@ -568,26 +572,28 @@ public class EntrerEchantillon extends Application{
                 GridPane gpCRL = new GridPane();
                 Label lblCRL = new Label("Test de régression linéaire");
                 lblCRL.setAlignment(Pos.CENTER);
-                String s = "Ce test permet de tester un éventuel effet d’une variable explicative x sur une variable expliquée y.\n" +
-                        "H0 : x n’influence pas y\n" +
-                        "Notation des indices de degré de liberté : a=nombre d’échantillons (=2) ; n = la taille des échantillons\n" +
-                        "Etapes / Détail calcul :\n" +
-                        "Calculs des moyennes, variances des deux échantillons, covariance, sct(x)\n" +
-                        "SCT : ∑(Xi-Xmoy)²\n" +
-                        "Calcul de l’équation de la droite des moindres carrés y=B1*x+B0 (obtenue à part des données empirique de x et de y)\n" +
-                        "B1 : cov(x,y)/var(x)\n" +
-                        "B0 : moyenne(y) – B1*moyenne(x)\n" +
-                        "Calcul de la corrélation entre le modèle et les valeurs empiriques de y, par le coefficient de corrélation linéaire r\n"+
-                        "R = r² = pourcentage de variance expliquée par le modèle\n" +
-                        "Conditions : si R<0.8 : on ne peut pas tester ni rejeter H0.\n" +
-                        "r : cov/(√ (var(x)*var(y)) \n" +
-                        "R=r²\n" +
-                        "Calcul de l’indice de Fischer F :\n" +
-                        "SCM : R * SCT(x) ou ∑(moyenne(i)-moyenne tt) ²\n" +
-                        "SCE : SCT(x)-SCM ou ∑ (Yi -Yi estimé) ²\n" +
-                        "F : (SCM*taille-2) /SCE\n" +
-                        "Puis récupération du quantile théorique en fonction des degrés de liberté d’une loi de Fischer : a-1, n -2.\n" +
-                        "Comparaison de F et du quantile théorique (1, n-2) : Si  F > au quantile : On rejette H0 : x a un effet sur y, sinon one ne rejette pas H0.\n";
+                String s = """
+                        Ce test permet de tester un éventuel effet d’une variable explicative x sur une variable expliquée y.
+                        H0 : x n’influence pas y
+                        Notation des indices de degré de liberté : a=nombre d’échantillons (=2) ; n = la taille des échantillons
+                        Etapes / Détail calcul :
+                        Calculs des moyennes, variances des deux échantillons, covariance, sct(x)
+                        SCT : ∑(Xi-Xmoy)²
+                        Calcul de l’équation de la droite des moindres carrés y=B1*x+B0 (obtenue à part des données empirique de x et de y)
+                        B1 : cov(x,y)/var(x)
+                        B0 : moyenne(y) – B1*moyenne(x)
+                        Calcul de la corrélation entre le modèle et les valeurs empiriques de y, par le coefficient de corrélation linéaire r
+                        R = r² = pourcentage de variance expliquée par le modèle
+                        Conditions : si R<0.8 : on ne peut pas tester ni rejeter H0.
+                        r : cov/(√ (var(x)*var(y))\s
+                        R=r²
+                        Calcul de l’indice de Fischer F :
+                        SCM : R * SCT(x) ou ∑(moyenne(i)-moyenne tt) ²
+                        SCE : SCT(x)-SCM ou ∑ (Yi -Yi estimé) ²
+                        F : (SCM*taille-2) /SCE
+                        Puis récupération du quantile théorique en fonction des degrés de liberté d’une loi de Fischer : a-1, n -2.
+                        Comparaison de F et du quantile théorique (1, n-2) : Si  F > au quantile : On rejette H0 : x a un effet sur y, sinon one ne rejette pas H0.
+                        """;
                 TextArea taCRL = new TextArea(s);
                 taCRL.setEditable(false);
                 taCRL.setMinSize(730,380);
@@ -604,20 +610,22 @@ public class EntrerEchantillon extends Application{
                 GridPane gpCA = new GridPane();
                 Label lblCA = new Label("Test d'anova à un facteur");
                 lblCA.setAlignment(Pos.CENTER);
-                String s = "Test d’anova à un facteur : Quoi, pourquoi, H0, étapes, conditions\n" +
-                        "Ce test permet de tester l’égalité des moyennes d’un groupe d’échantillons.\n" +
-                        "H0 : égalité des moyennes, H1 : non. Il s’agit donc d’un test bilatéral \n" +
-                        "Etapes :\n" +
-                        "Calcul variance et moyenne de chaque échantillon\n" +
-                        "Notation des indices de degré de liberté : a=nombre d’échantillons ;\n" +
-                        "t = taille des échantillons ; n = nombre total de valeurs : a*t\n" +
-                        "Détail calcul : \n" +
-                        "Calcul de l’indice de Ficher F :\n" +
-                        "SCE : somme des variances\n" +
-                        "SCM : t * ∑(moyenne(i)-moyenne tt) ²\n" +
-                        "F : (SCM /(a-1))/(SCE/(n-a))\n" +
-                        "Comparaison de F et du quantile théorique(a-1,n-a) : \n" +
-                        "Si F est < au quantile : On ne rejette pas H0 :  égalité des moyennes\n";
+                String s = """
+                        Test d’anova à un facteur : Quoi, pourquoi, H0, étapes, conditions
+                        Ce test permet de tester l’égalité des moyennes d’un groupe d’échantillons.
+                        H0 : égalité des moyennes, H1 : non. Il s’agit donc d’un test bilatéral\s
+                        Etapes :
+                        Calcul variance et moyenne de chaque échantillon
+                        Notation des indices de degré de liberté : a=nombre d’échantillons ;
+                        t = taille des échantillons ; n = nombre total de valeurs : a*t
+                        Détail calcul :\s
+                        Calcul de l’indice de Ficher F :
+                        SCE : somme des variances
+                        SCM : t * ∑(moyenne(i)-moyenne tt) ²
+                        F : (SCM /(a-1))/(SCE/(n-a))
+                        Comparaison de F et du quantile théorique(a-1,n-a) :\s
+                        Si F est < au quantile : On ne rejette pas H0 :  égalité des moyennes
+                        """;
                 TextArea taTest = new TextArea(s);
                 taTest.setEditable(false);
                 taTest.setMinSize(700,280);
@@ -687,17 +695,17 @@ public class EntrerEchantillon extends Application{
                 yAxis2.setLabel("Y");
                 xAxis1.setLabel("X");
                 final ScatterChart<Number,Number> bc =
-                        new ScatterChart<Number, Number>(xAxis,yAxis);
+                        new ScatterChart<>(xAxis,yAxis);
                 bc.setTitle("Nuage de points");
                 final LineChart<Number,Number> lc =
-                        new LineChart<Number, Number>(xAxis1,yAxis2);
+                        new LineChart<>(xAxis1,yAxis2);
                 for(int i=0;i<compt.length;i++) {
                     if(compt[i]!=0) {
                         compteur++;
                         Echantillon dl = tabEch[i];
-                        XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+                        XYChart.Series<Number, Number> series = new XYChart.Series<>();
                         for (int k = 0; k < dl.taille; k++) {
-                            series.getData().add(new XYChart.Data(k, dl.donnees.get(k)));
+                            series.getData().add(new XYChart.Data<>(k, dl.donnees.get(k)));
                         }
                         series.setName("Echantillon n°" + i);
                         if(compteur==1){
