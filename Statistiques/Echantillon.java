@@ -1,4 +1,4 @@
-package com.example.statistiques;
+package com.example.statistique;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ class Echantillon {
 
     Echantillon(String s) throws ExceptionDonneesEntree{
 
-            if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
+        if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
 
                 String[] sprim = s.split(";");
                 donnees = new ArrayList<>();

@@ -1,9 +1,10 @@
-package com.example.statistiques;
+package com.example.statistique;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -256,16 +257,39 @@ public class EntrerEchantillon extends Application{
             }
         });
         btnfile.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle ( final ActionEvent e){
+            @Override
+            public void handle ( final ActionEvent e){
                 File file = fileChooser.showOpenDialog(primaryStage);
-                if (file != null) {
-                    try {
-                        openFile(file.toPath());
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                if(file==null)return;
+                for(CheckBox tb:tabBtn){
+                    tb.setVisible(false);
                 }
+                EchantillonReader er = new EchantillonReader(file.toPath().toString());
+                compteur = er.getCompteur();
+                if(compteur>=1) tabBtn[0].setVisible(true);
+                if(compteur>=2) {
+                    tabBtn[1].setVisible(true);
+                    btnRL.setVisible(true);
+                    btnAnova.setVisible(true);
+                    btnchi2.setVisible(true);
+                }
+                for(int i=2;i<tabBtn.length;i++){
+                    if(compteur>i)tabBtn[i].setVisible(true);
+                }
+                int ik=0;
+                try {
+                    String[] result= er.EchantillonToString();
+                    for(int i=0;i< tabEch.length;i++){
+                        if(ik<compteur){
+                            System.out.println(result[ik]);
+                            tabEch[i]=new Echantillon(result[ik]);
+                            ik++;
+                        }
+                    }
+                } catch (ExceptionDonneesEntree ex) {
+                    throw new RuntimeException(ex);
+                }
+
             }
         });
         btnModif.setOnAction(new EventHandler<ActionEvent>() {
@@ -273,7 +297,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -294,7 +318,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -307,7 +331,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -319,7 +343,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -331,7 +355,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -343,7 +367,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -355,7 +379,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -367,7 +391,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -379,7 +403,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -391,7 +415,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -403,7 +427,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -421,7 +445,7 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 int c = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         c = i;
                         break;
                     }
@@ -439,23 +463,23 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 ecran.setText("ANOVA:");
                 int compt =0;
-                for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) compt++;
+                for(CheckBox tb:tabBtn){
+                    if(tb.isSelected()) compt++;
                 }
                 Echantillon[] echAN = new Echantillon[compt];
-                    compt = 0;
-                for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                compt = 0;
+                for(int i = 0;i<tabEch.length;i++ ){
+                    if(tabBtn[i].isSelected()) {
                         echAN[compt] = tabEch[i];
                         compt++;
                     }
                 }
-                    try {
-                        Anova an = new Anova(echAN);
-                        ecran.setText(an.decision());
-                    } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en){
-                        ecran.setText(en.getMessage());
-                    }
+                try {
+                    Anova an = new Anova(echAN);
+                    ecran.setText(an.decision());
+                } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en){
+                    ecran.setText(en.getMessage());
+                }
             }
         });
         btnchi2.setOnAction(new EventHandler<ActionEvent>() {
@@ -464,12 +488,12 @@ public class EntrerEchantillon extends Application{
                 ecran.setText("Chi2:");
                 int compt =0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) compt++;
+                    if(tabBtn[i].isSelected()) compt++;
                 }
                 Echantillon[] echC2 = new Echantillon[compt];
                 compt = 0;
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         echC2[compt] = tabEch[i];
                         compt++;
                     }
@@ -489,7 +513,7 @@ public class EntrerEchantillon extends Application{
                 int compt = 0;
                 Echantillon[] echRL = new Echantillon[2];
                 for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()== true) {
+                    if(tabBtn[i].isSelected()) {
                         echRL[compt] = tabEch[i];
                         compt++;
                         if(compt==2)break;
@@ -511,32 +535,32 @@ public class EntrerEchantillon extends Application{
 
         btnTest.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e){
-            Stage stage = new Stage();
-            stage.setTitle("Les tests statistiques");
-            GridPane gpts = new GridPane();
-            Label lblTest = new Label("Les tests statisitques");
-            lblTest.setAlignment(Pos.CENTER);
-            String s = "Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,\n" +
-                    " dite nulle, en fonction d’échantillons donnés.\n"+
-               "Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%\n"+
-                "        Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.\n"+
-                "Pour cela il faut :\n"+
-                "-	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience\n" +
-                    " (par exemple l’égalités de moyennes ou de variance), H1 est son contraire \n" +
-                    "(soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.\n"+
-                    "-	 Récupérer des données\n"+
-                "-	Choisir un type de test\n"+
-                "-	Analyser les résultats : récup d’une valeur, comparaison avec les tables";
+                Stage stage = new Stage();
+                stage.setTitle("Les tests statistiques");
+                GridPane gpts = new GridPane();
+                Label lblTest = new Label("Les tests statisitques");
+                lblTest.setAlignment(Pos.CENTER);
+                String s = "Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,\n" +
+                        " dite nulle, en fonction d’échantillons donnés.\n"+
+                        "Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%\n"+
+                        "        Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.\n"+
+                        "Pour cela il faut :\n"+
+                        "-	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience\n" +
+                        " (par exemple l’égalités de moyennes ou de variance), H1 est son contraire \n" +
+                        "(soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.\n"+
+                        "-	 Récupérer des données\n"+
+                        "-	Choisir un type de test\n"+
+                        "-	Analyser les résultats : récup d’une valeur, comparaison avec les tables";
 
                 TextArea taTest = new TextArea(s);
                 taTest.setEditable(false);
                 taTest.setMinSize(700,280);
-            gpts.add(lblTest,0,0);
-            gpts.add(taTest,0,1);
-            Scene scene  = new Scene(gpts,750,300);
-            stage.setScene(scene);
-            stage.show();
-        }});
+                gpts.add(lblTest,0,0);
+                gpts.add(taTest,0,1);
+                Scene scene  = new Scene(gpts,750,300);
+                stage.setScene(scene);
+                stage.show();
+            }});
         btnCRL.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e){
                 Stage stage = new Stage();
@@ -643,34 +667,67 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 Stage stage = new Stage();
+                Stage stage2 = new Stage();
+                int compteur=0;
+                Echantillon vi  = tabEch[0];
+                int[] compt= new int[12];
+                for(CheckBox tb:tabBtn){
+                    if(tb.isSelected()) compt[compteur]=1;
+                    compteur++;
+                }
+                compteur = 0;
                 stage.setTitle("Bar Chart Sample");
+                stage2.setTitle("Regression linéaire");
                 final NumberAxis xAxis = new NumberAxis();
                 final NumberAxis yAxis = new NumberAxis();
+                final NumberAxis xAxis1 = new NumberAxis();
+                final NumberAxis yAxis2 = new NumberAxis();
+                yAxis.setLabel("Y");
+                xAxis.setLabel("X");
+                yAxis2.setLabel("Y");
+                xAxis1.setLabel("X");
                 final ScatterChart<Number,Number> bc =
                         new ScatterChart<Number, Number>(xAxis,yAxis);
                 bc.setTitle("Nuage de points");
-                xAxis.setLabel("X");
-                yAxis.setLabel("Y");
-                ArrayList<Double> dl = new ArrayList<>();
-                XYChart.Series<Number,Number> series1 = new XYChart.Series<Number,Number>();
-                Random random = new Random();
-                for(int i=0;i<20000;i++){
-                    dl.add(random.nextGaussian());
+                final LineChart<Number,Number> lc =
+                        new LineChart<Number, Number>(xAxis1,yAxis2);
+                for(int i=0;i<compt.length;i++) {
+                    if(compt[i]!=0) {
+                        compteur++;
+                        Echantillon dl = tabEch[i];
+                        XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+                        for (int k = 0; k < dl.taille; k++) {
+                            series.getData().add(new XYChart.Data(k, dl.donnees.get(k)));
+                        }
+                        series.setName("Echantillon n°" + i);
+                        if(compteur==1){
+                            vi=dl;
+                        }
+                        if(compteur==2){
+                            try {
+                                RegressionLineaire RL = new RegressionLineaire(vi, dl);
+                                Echantillon rl = new Echantillon(RL.getYjust());
+                                LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
+                                for(int k=0;k<rl.taille;k++){
+                                    series1.getData().add(new LineChart.Data(k, rl.donnees.get(k)));
+                                }
+                                lc.getData().add(series1);
+                            } catch (ExceptionTailleEchantillon ex) {
+                                ecran.setText("taille des échantillons différentes");
+                            }
+                        }
+                        series.getData().add(new XYChart.Data(dl.taille + 2, dl.getMoyenne()));
+                        series.getData().add(new XYChart.Data(dl.taille + 3, dl.getMediane()));
+                        bc.getData().add(series);
+                    }
                 }
-                Collections.sort(dl);
-                for(int k=0;k<20000;k++) {
-                    series1.getData().add(new XYChart.Data(k,dl.get(k)));
-                }
-
-
-                bc.getData().addAll(series1);
-                final DropShadow shadow = new DropShadow();
-                shadow.setOffsetX(2);
-                shadow.setColor(Color.GREY);
                 Scene scene  = new Scene(bc,800,600);
-                bc.setEffect(shadow);
+                Scene scene1  = new Scene(lc,800,600);
                 stage.setScene(scene);
+                stage2.setScene(scene1);
                 stage.show();
+                stage2.show();
+
             }});
         //primaryStage.sizeToScene();
         //primaryStage.setFullScreen(true);
