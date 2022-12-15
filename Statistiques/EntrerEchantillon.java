@@ -165,7 +165,19 @@ public class EntrerEchantillon extends Application{
         gpech.add(btnquartile, 0, 4);
         gpech.add(btnfrequence, 1, 4);
 
-
+        ArrayList<Button> lsBtnUnEchantillon = new ArrayList<Button>();
+        lsBtnUnEchantillon.add(btnMoy);
+        lsBtnUnEchantillon.add(btnTaille);
+        lsBtnUnEchantillon.add(btnMin);
+        lsBtnUnEchantillon.add(btnMax);
+        lsBtnUnEchantillon.add(btnEcarttype);
+        lsBtnUnEchantillon.add(btnVariance);
+        lsBtnUnEchantillon.add(btnsct);
+        lsBtnUnEchantillon.add(btnMediane);
+        lsBtnUnEchantillon.add(btnquartile);
+        lsBtnUnEchantillon.add(btnfrequence);
+        lsBtnUnEchantillon.forEach(b -> b.setVisible(false));
+        
         GridPane grid3 = new GridPane();
         grid3.setHgap(10);
         grid3.setVgap(10);
@@ -244,6 +256,7 @@ public class EntrerEchantillon extends Application{
                         tabEch[compteur] = new Echantillon(entree.getText());
                         tabBtn[compteur].setVisible(true);
                         compteur++;
+                        lsBtnUnEchantillon.forEach(b -> b.setVisible(true));
                         if(compteur==2) {
                             btnRL.setVisible(true);
                             btnAnova.setVisible(true);
