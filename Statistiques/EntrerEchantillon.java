@@ -122,43 +122,14 @@ public class EntrerEchantillon extends Application{
         grid2.setHgap(10);
         grid2.setVgap(10);
         grid2.add(t2,0,0);
-        CheckBox cb = new CheckBox("Echantillon 1");
-        grid2.add(cb, 0,1);
-        cb.setVisible(false);
-        CheckBox cb1 = new CheckBox("Echantillon 2");
-        grid2.add(cb1, 0,2);
-        cb1.setVisible(false);
-        CheckBox cb2 = new CheckBox("Echantillon 3");
-        grid2.add(cb2, 0,3);
-        cb2.setVisible(false);
-        CheckBox cb3 = new CheckBox("Echantillon 4");
-        grid2.add(cb3, 0,4);
-        cb3.setVisible(false);
-        CheckBox cb4 = new CheckBox("Echantillon 5");
-        grid2.add(cb4, 0,5);
-        cb4.setVisible(false);
-        CheckBox cb5 = new CheckBox("Echantillon 6");
-        grid2.add(cb5, 0,6);
-        cb5.setVisible(false);
-        CheckBox cb6 = new CheckBox("Echantillon 7");
-        grid2.add(cb6, 1,1);
-        cb6.setVisible(false);
-        CheckBox cb7 = new CheckBox("Echantillon 8");
-        grid2.add(cb7, 1,2);
-        cb7.setVisible(false);
-        CheckBox cb8 = new CheckBox("Echantillon 9");
-        grid2.add(cb8, 1,3);
-        cb8.setVisible(false);
-        CheckBox cb9 = new CheckBox("Echantillon 10");
-        grid2.add(cb9, 1,4);
-        cb9.setVisible(false);
-        CheckBox cb10 = new CheckBox("Echantillon 11");
-        grid2.add(cb10, 1,5);
-        cb10.setVisible(false);
-        CheckBox cb11 = new CheckBox("Echantillon 12");
-        grid2.add(cb11, 1,6);
-        cb11.setVisible(false);
-
+        CheckBox[] tabBtn = new CheckBox[12];
+        for( int i = 0;i<12; i++){
+            CheckBox cB = new CheckBox("Echantillon "+(i));
+            tabBtn[i]= cB;
+            if(i<6) grid2.add(cB,0,i+1);
+            else grid2.add(cB,1,(i-5));
+            cB.setVisible(false);
+        }
         GridPane gpech = new GridPane();
         gpech.setHgap(10);
         gpech.setVgap(10);
@@ -267,24 +238,13 @@ public class EntrerEchantillon extends Application{
                         actiontarget.setText(new String(("Plus de place,pour un nouvel échantillon")));
                     }else {
                         tabEch[compteur] = new Echantillon(entree.getText());
+                        tabBtn[compteur].setVisible(true);
                         compteur++;
-                        if(compteur==1) cb.setVisible(true);
                         if(compteur==2) {
-                            cb1.setVisible(true);
                             btnRL.setVisible(true);
                             btnAnova.setVisible(true);
                             btnchi2.setVisible(true);
                         }
-                        if(compteur==3) cb2.setVisible(true);
-                        if(compteur==4) cb3.setVisible(true);
-                        if(compteur==5) cb4.setVisible(true);
-                        if(compteur==6) cb5.setVisible(true);
-                        if(compteur==7) cb6.setVisible(true);
-                        if(compteur==8) cb7.setVisible(true);
-                        if(compteur==9) cb8.setVisible(true);
-                        if(compteur==10) cb9.setVisible(true);
-                        if(compteur==11) cb10.setVisible(true);
-                        if(compteur==12) cb11.setVisible(true);
                         actiontarget.setFill(Color.BLUE);
                         actiontarget.setText("échantillon " + compteur + " créé");
                     }
@@ -312,17 +272,12 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 try {
                     tabEch[c] = new Echantillon(entree.getText());
                     ecran.setText(tabEch[c].toString());
@@ -338,17 +293,12 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(tabEch[c].toString());
             }
         });
@@ -356,153 +306,108 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getMoyenne()));
             }
         }); btnMediane.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getMediane()));
             }
         }); btnVariance.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getVariance()));
             }
         }); btnsct.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getSCT()));
             }
         });btnEcarttype.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getEcarttype()));
             }
         });btnMin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getMinimum()));
             }
         });btnMax.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getMaximum()));
             }
         });btnTaille.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 ecran.setText(String.valueOf(tabEch[c].getTaille()));
             }
         });btnfrequence.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 try {
                     ecran.setText(String.valueOf(tabEch[c].getFrequence(Double.parseDouble(entree.getText()))));
                 }
@@ -515,17 +420,12 @@ public class EntrerEchantillon extends Application{
             @Override
             public void handle(ActionEvent e) {
                 int c = 0;
-                if(cb1.isSelected()) c=1;
-                if(cb2.isSelected()) c=2;
-                if(cb3.isSelected()) c=3;
-                if(cb4.isSelected()) c=4;
-                if(cb5.isSelected()) c=5;
-                if(cb6.isSelected()) c=6;
-                if(cb7.isSelected()) c=7;
-                if(cb8.isSelected()) c=8;
-                if(cb9.isSelected()) c=9;
-                if(cb10.isSelected()) c=10;
-                if(cb11.isSelected()) c=11;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        c = i;
+                        break;
+                    }
+                }
                 try {
                     ecran.setText(String.valueOf(tabEch[c].getQuartiles(Integer.parseInt(entree.getText()))));
                 }catch(Exception def){
@@ -539,215 +439,61 @@ public class EntrerEchantillon extends Application{
             public void handle(ActionEvent e) {
                 ecran.setText("ANOVA:");
                 int compt =0;
-                if(cb.isSelected()) compt++;
-                if(cb1.isSelected()) compt++;
-                if(cb2.isSelected()) compt++;
-                if(cb3.isSelected()) compt++;
-                if(cb4.isSelected()) compt++;
-                if(cb5.isSelected()) compt++;
-                if(cb6.isSelected()) compt++;
-                if(cb7.isSelected()) compt++;
-                if(cb8.isSelected()) compt++;
-                if(cb9.isSelected()) compt++;
-                if(cb10.isSelected()) compt++;
-                if(cb11.isSelected()) compt++;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) compt++;
+                }
                 Echantillon[] echAN = new Echantillon[compt];
                     compt = 0;
-
-                    if (cb.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        echAN[compt] = tabEch[i];
                         compt++;
                     }
-                    if (cb1.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
-                        compt++;
-                    }
-                    if (cb2.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
-                        compt++;
-                    }
-                    if (cb3.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
-                        compt++;
-                    }
-                    if (cb4.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
-                        compt++;
-                    }
-                    if (cb5.isSelected() ) {
-                        echAN[compt] = tabEch[compt];
-                        compt++;
-                    }
-                if (cb6.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb7.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb8.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb9.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb10.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb11.isSelected() ) {
-                    echAN[compt] = tabEch[compt];
-                    compt++;
                 }
                     try {
                         Anova an = new Anova(echAN);
                         ecran.setText(an.decision());
                     } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en){
                         ecran.setText(en.getMessage());
-
                     }
-
             }
-
         });
         btnchi2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 ecran.setText("Chi2:");
                 int compt =0;
-                if(cb.isSelected()) compt++;
-                if(cb1.isSelected()) compt++;
-                if(cb2.isSelected()) compt++;
-                if(cb3.isSelected()) compt++;
-                if(cb4.isSelected()) compt++;
-                if(cb5.isSelected()) compt++;
-                if(cb6.isSelected()) compt++;
-                if(cb7.isSelected()) compt++;
-                if(cb8.isSelected()) compt++;
-                if(cb9.isSelected()) compt++;
-                if(cb10.isSelected()) compt++;
-                if(cb11.isSelected()) compt++;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) compt++;
+                }
                 Echantillon[] echC2 = new Echantillon[compt];
                 compt = 0;
-
-                if (cb.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb1.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb2.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb3.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb4.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb5.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb6.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb7.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb8.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb9.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb10.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb11.isSelected() ) {
-                    echC2[compt] = tabEch[compt];
-                    compt++;
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        echC2[compt] = tabEch[i];
+                        compt++;
+                    }
                 }
                 try {
                     Chi2 c2 =new Chi2(echC2);
                     ecran.setText(c2.decision());
                 } catch (IllegalArgumentException en){
                     ecran.setText(en.getMessage());
-
                 }
-
             }
-
         });
         btnRL.setOnAction(new EventHandler<ActionEvent>() {
-
-
             @Override
             public void handle(ActionEvent e) {
                 ecran.setText("Régression linéaire:");
                 int compt = 0;
                 Echantillon[] echRL = new Echantillon[2];
-                if (cb.isSelected() ) {
-                    echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb1.isSelected() ) {
-                    echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb2.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
+                for(int i = 0;i<12;i++ ){
+                    if(tabBtn[i].isSelected()== true) {
+                        echRL[compt] = tabEch[i];
                         compt++;
-
-                }
-                if (cb3.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
+                        if(compt==2)break;
                     }
-                if (cb4.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb5.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb6.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb7.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb8.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb9.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb10.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
-                }
-                if (cb11.isSelected() ) {
-                    if (compt < 2) echRL[compt] = tabEch[compt];
-                    compt++;
                 }
 
                 try {
