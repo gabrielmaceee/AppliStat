@@ -79,9 +79,11 @@ public class EntrerEchantillon extends Application{
         hbBtn.setAlignment(Pos.CENTER);
         hbBtn.getChildren().add(btn);
         Button btnModif = new Button("Modifier un échantillon");
+        Button btnSuppr = new Button("Supprimer un échantillon");
         HBox hbBtnModif = new HBox(10);
         hbBtnModif.setAlignment(Pos.CENTER);
         hbBtnModif.getChildren().add(btnModif);
+        hbBtnModif.getChildren().add(btnSuppr);
         grid.add(t, 0,0);
         grid.add(entree,0,1);
         grid.add(hbBtn, 0, 2);
@@ -338,6 +340,41 @@ public class EntrerEchantillon extends Application{
                 }
             }
         });
+                                
+        btnSuppr.setOnAction(
+                e -> {
+
+                    ArrayList<Echantillon> lsEchantillons = new ArrayList<>(Arrays.asList(tabEch));
+                    int i = 0;
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Echantillon supprimer n°: {");
+                    for(CheckBox cbx: tabBtn){
+                        if(cbx.isSelected() && cbx.isVisible()) { // limitation effet de bord sur cbx invisible
+                            lsEchantillons.remove(i);
+                            sb.append(i).append(",");
+                            compteur--;
+                            i++;
+                        }
+                    }
+                    sb.replace(sb.length() - 1, sb.length(), "}");
+
+                    for(CheckBox c: tabBtn){
+                        c.setVisible(false);
+                        c.setSelected(false);
+                    }
+
+                    for (int j = 0; j < lsEchantillons.size();j++) {
+                        tabEch[j] = lsEchantillons.get(j);
+                        if (tabEch[j] != null) {
+                            c[j].setVisible(true);
+                        }
+                    }
+
+                    actiontarget.setFill(Color.ORANGE);
+                    actiontarget.setText(sb.toString());
+                }
+        );                        
+                                
         btnAffiche.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -764,14 +801,17 @@ public class EntrerEchantillon extends Application{
                 stage.show();
                 stage2.show();
 
-            }});
-                  QCM.setOnAction(new EventHandler<ActionEvent>() {
+        }});
+      
+        QCM.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 QCM ex = new QCM();
                 Stage stageQCM = new Stage();
                 ex.start(stageQCM);
             }});
+                
+                
         //primaryStage.sizeToScene();
         //primaryStage.setFullScreen(true);
         primaryStage.show();
