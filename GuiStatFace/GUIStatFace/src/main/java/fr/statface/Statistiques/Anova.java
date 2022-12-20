@@ -28,7 +28,7 @@ public class Anova{
                 }
     }
 
-    public double getSCE() {
+    double getSCE() {
         double SCE = 0;
         for(int i = 0; i<a; i++) {
             SCE += tabVariances[i];
@@ -36,7 +36,7 @@ public class Anova{
         return SCE;
     }
 
-    public double getSCM() {
+    double getSCM() {
         double SCM = 0;
         double moyenneTotale = 0;
         for(int i = 0; i<a; i ++) {
@@ -44,19 +44,19 @@ public class Anova{
         }
         moyenneTotale /= a;
         for(int i = 0; i<a; i ++) {
-            SCM += t*Math.pow((tabEchantillons[i].getMoyenne()-moyenneTotale),2);
+            SCM += t*Math.pow((tabMoyennes[i]-moyenneTotale),2);
         }
-
         return SCM;
     }
 
-    public double getF() {
+    double getF() {
         return (getSCM()/ (a-1))/(getSCE()/(n-a));
     }
 
     public String decision() {
-        String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ CSVReader.getQuantile(a-1,n-a)+"\n";
-        if (getF()<CSVReader.getQuantile(a-1,n-a)) {
+        CSVFisherReader csv  = new CSVFisherReader();
+        String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(a-1,n-a)+"\n";
+        if (getF()<csv.getQuantile(a-1,n-a)) {
             return (s +"Au seuil 5% on ne rejette pas H0");
             //return true;//on rejette pas l'égalité des moyennes
         }

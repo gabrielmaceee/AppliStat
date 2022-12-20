@@ -8,7 +8,7 @@ public class Chi2 {
     int tailleEchantillons;
     int degreLiberte;
 
-    public Chi2 (Echantillon[] a){
+    public Chi2(Echantillon[] a){
         if (a.length <2) throw new IllegalArgumentException("Un test du chi 2 se fait au moins sur deux echantillons");
         tailleEchantillons = a[0].taille;
         for(int i = 1; i<nbEchantillon; i++) {
@@ -42,7 +42,7 @@ public class Chi2 {
 
 
         for(int i = 0; i<nbEchantillon; i++) {//colonnes
-            double[] tabD = new double[tailleEchantillons];
+            double tabD [] = new double[tailleEchantillons];
             for(int k = 0; k<tailleEchantillons; k++) {//recherche d'une valeur attendue dans la colonne i et la ligne j
                 int compt = 0;
                 tabD[k]= ((sommeColonne[i]*sommeLigne[k])/sommeTotale);
@@ -65,9 +65,13 @@ public class Chi2 {
     }
 
     public String decision() {
-        return getDifference() <= tabCHI2[degreLiberte-1] ?
-                "Décision : Au seuil 5% nous rejetons l'indépendance des variables"
-                : "Décision : Au seuil 5%, nous ne pouvons pas rejeter l'indépendance des variables";
+        String s = "H0 :  x et y sont indépendants \n" + getDifference();
+        if(getDifference() <= tabCHI2[degreLiberte-1]) {
+            s+= "Décision : Au seuil 5% nous rejetons l'indépendance des variables";
+            return s;
+        }
+        s+="Décision : Au seuil 5%, nous ne pouvons pas rejeter l'indépendance des variables";
+        return s;
     }
 
 

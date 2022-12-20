@@ -42,20 +42,20 @@ public class RegressionLineaire {
 
     public String decision() {
         String s = "H0 = x n'a pas d'effet sur y \nCovariance = " + getCov() +"\nBeta1 = "+getBeta1()+"\nBeta0 = "+ getBeta0()+"\nr = "+ getr() + "\nR² = "+getR()+"\n";
-
+        CSVFisherReader csv = new CSVFisherReader();
         if(getR()<0.8) {
             return (s+"Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
-           // throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
+           // throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree")
         }
-        s += "SCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ CSVReader.getQuantile(1,vd.taille-2)+"\n";
-        if (getF()>CSVReader.getQuantile(1,vd.taille-2)) {
+        s += "SCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(1,vd.taille-2)+"\n";
+        if (getF()>csv.getQuantile(1,vd.taille-2)) {
             return(s+ "Au seuil 5%, on rejette H0 : x a un effet sur y");
            // return true;
         }
         return(s+"Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
         //return false;
     }
-    double[] getYjust(){
+    public double[] getYjust(){
         double[] yjust = new double[vi.taille];
         int k=0;
         double beta0=getBeta0(),beta1=getBeta1();
@@ -83,7 +83,7 @@ public class RegressionLineaire {
             System.out.println(test.decision());
         }
         catch (ExceptionTailleEchantillon et){
-            et.printStackTrace();
+            System.out.println(et.getMessage());
         }
 
 

@@ -2,9 +2,10 @@ package fr.statface.Statistiques;
 
 import java.util.*;
 
+
 public class Echantillon {
 
-    List<Double> donnees;
+    public List<Double> donnees;
     int taille;
     List<Double> donneesTriees;
 
@@ -15,15 +16,15 @@ public class Echantillon {
 
                 String[] sprim = s.split(";");
                 donnees = new ArrayList<>();
-        for (String value : sprim) {
-            //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
-            try {
-                double c = Double.parseDouble(value);
-                donnees.add(c);
-            } catch (Exception e) {
-                //System.out.println(e.getMessage());
-                throw new ExceptionDonneesEntree();
-            }
+                for (String value : sprim) {
+                     //if((sprim[i] instanceof String) == false) throw new ExceptionDonneesEntree();
+                    try {
+                        double c = Double.parseDouble(value);
+                        donnees.add(c);
+                    }catch (Exception e) {
+                        //System.out.println(e.getMessage());
+                        throw new ExceptionDonneesEntree();
+                }
         }
                 instanciationTrie(donnees);
     }
@@ -36,7 +37,7 @@ public class Echantillon {
         instanciationTrie(donnees);
     }
 
-    public void instanciationTrie(List<Double> tab){
+    void instanciationTrie(List<Double> tab){
         donneesTriees = new ArrayList<>();
         taille = tab.size();
         donneesTriees.addAll(donnees);
@@ -66,11 +67,11 @@ public class Echantillon {
     }
     public double getMaximum(){
         return donneesTriees.get(taille-1);
-    }
+    };
 
     public double getMinimum() {
         return donneesTriees.get(0);
-    }
+    };
     public int getFrequence(double d){
         int c =0;
         for(int i = 0; i<taille; i++){
@@ -78,7 +79,6 @@ public class Echantillon {
         }
         return c;
     }
-
     public double getMediane() {
         if (taille % 2 ==1) return donneesTriees.get(taille/2);
         int m = taille/2 -1;
@@ -95,14 +95,14 @@ public class Echantillon {
     }
     public double getQuartiles(int quartile) {
         double result = 0;
-        float b;
-        float a = b = 0;
+        float a =0,b = 0;
         if (quartile > 4) throw new IllegalArgumentException("really?");
-        if (quartile == 2) return this.getMediane();
-        if (quartile == 4) return donneesTriees.get(taille - 1);
-        if (quartile == 0) return donneesTriees.get(0);
-        if (quartile == 1) result = ((float)taille + 3) / 4 ;
-        if (quartile == 3) result = (3 * (float)taille + 1) / 4 ;
+        else if (quartile == 2) return this.getMediane();
+        else if (quartile == 4) return donneesTriees.get(taille - 1);
+        else if (quartile == 0) return donneesTriees.get(0);
+        else if (quartile == 1) result = ((float)taille + 3) / 4 ;
+        else if (quartile == 3) result = (3 * (float)taille + 1) / 4 ;
+
         if (result != ((int) result)) {
             a = (float) (result - ((int) result));
             b = 1 - a;

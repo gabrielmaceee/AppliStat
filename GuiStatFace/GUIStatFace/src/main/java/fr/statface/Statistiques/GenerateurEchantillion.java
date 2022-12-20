@@ -1,35 +1,28 @@
 package fr.statface.Statistiques;
-
+import java.util.List;
 import java.util.Random;
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class GenerateurEchantillion {
-    private final ArrayList<Number> ls;
+    private final List<Number> ls;
     private static final Random rdm = new Random();
 
     public  GenerateurEchantillion(){
         this(50,30);
     }
 
-    /**
-     * Construit un échantillon qui sert pour alimenter l'interface
-     * @param size taille échantillion entier positif
-     * @param limit  entier
-     */
     public GenerateurEchantillion(int size, int limit) {
         if (size < 0) {
             throw new IllegalArgumentException("Pas de taille négative");
         }
-        ls = new ArrayList<>();
+        ls = new Vector<>(size);
         for (int i = 0; i < size; i++) {
             ls.add(rdm.nextDouble(limit+1));
         }
     }
 
 
-    /**
-     * @return les nombres de la liste séparée par virgule
-     */
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -39,6 +32,6 @@ public class GenerateurEchantillion {
 
     public static void main(String[] args) {
         GenerateurEchantillion genE = new GenerateurEchantillion();
-        System.out.println(genE.toString());
+        System.out.println(genE);
     }
 }
