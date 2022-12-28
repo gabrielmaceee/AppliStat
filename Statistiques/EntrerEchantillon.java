@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EntrerEchantillon extends Application{
     Echantillon[] tabEch = new Echantillon[12];
@@ -79,7 +80,7 @@ public class EntrerEchantillon extends Application{
         hbBtn.setAlignment(Pos.CENTER);
         hbBtn.getChildren().add(btn);
         Button btnModif = new Button("Modifier un échantillon");
-        Button btnSuppr = new Button("Supprimer un échantillon");
+        Button btnSuppr = new Button("Supprimer");
         HBox hbBtnModif = new HBox(10);
         hbBtnModif.setAlignment(Pos.CENTER);
         hbBtnModif.getChildren().add(btnModif);
@@ -192,14 +193,14 @@ public class EntrerEchantillon extends Application{
         grid3.setVgap(10);
         Label regle = new Label("""
                 Pour créer un échantillon à l'écrit:
-                 La syntaxe à respectée est de séparer chaque nombre par un';'
-                Vous pouvez faire des retours et des espaces à la ligne quand vous voulez\s
+                 La syntaxe à respectée est de séparer chaque nombre par un';'.
+                Vous pouvez faire des espaces et des retours à la ligne quand vous voulez.\s
+                Un échantillon doit être constitué d'au moins 2 nombres\n
                 Pour la description d'un échantillon :
-                Si vous avez séléctionné plusieurs échantillons : Seul le dernier séléctionné sera pris en compte
+                Si vous avez séléctionné plusieurs échantillons : Seul le premier séléctionné sera pris en compte
                 Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons
                 Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2""");
         grid3.add(regle,0,0);
-
 
         GridPane gridRL =new GridPane();
         gridRL.setHgap(10);
@@ -346,15 +347,18 @@ public class EntrerEchantillon extends Application{
 
                     ArrayList<Echantillon> lsEchantillons = new ArrayList<>(Arrays.asList(tabEch));
                     int i = 0;
+                    int k = 0;
                     StringBuilder sb = new StringBuilder();
-                    sb.append("Echantillon supprimer n°: {");
+                    sb.append("Echantillon supprimé(s) n°: {");
                     for(CheckBox cbx: tabBtn){
                         if(cbx.isSelected() && cbx.isVisible()) { // limitation effet de bord sur cbx invisible
                             lsEchantillons.remove(i);
-                            sb.append(i).append(",");
+                            sb.append(k).append(",");
                             compteur--;
-                            i++;
+                            i--;
                         }
+                        i++;
+                        k++;
                     }
                     sb.replace(sb.length() - 1, sb.length(), "}");
 
@@ -366,8 +370,11 @@ public class EntrerEchantillon extends Application{
                     for (int j = 0; j < lsEchantillons.size();j++) {
                         tabEch[j] = lsEchantillons.get(j);
                         if (tabEch[j] != null) {
-                            c[j].setVisible(true);
+                            tabBtn[j].setVisible(true);
                         }
+                    }
+                    for(int j = lsEchantillons.size(); j<tabEch.length; j++){
+                        tabEch[j]=null;
                     }
 
                     actiontarget.setFill(Color.ORANGE);
