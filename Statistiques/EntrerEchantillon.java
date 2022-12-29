@@ -621,12 +621,12 @@ public class EntrerEchantillon extends Application{
                         Risque de se tromper : rejeter H0 alors qu’elle est vraie = en général 5%
                                 Ici, nous verrons que les tests paramétriques : On connait la loi que suivent les données.
                         Pour cela il faut :
-                        -	Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience
+                        -   Formuler l’hypothèse nulle H0, et l’hypothèse alternative H1 : H0 correspond à un non-effet de l’expérience
                          (par exemple l’égalités de moyennes ou de variance), H1 est son contraire\s
-                        (soit une différence-> test bilatéral, soit supérieur ou inférieur ->unilatéral.
-                        -	 Récupérer des données
+                        (soi une différence-> test bilatéral, soi supérieur ou inférieur ->unilatéral.
+                        -	Récupérer des données
                         -	Choisir un type de test
-                        -	Analyser les résultats : récup d’une valeur, comparaison avec les tables""";
+                        -	Analyser les résultats : récupération d’une valeur, comparaison avec les tables""";
 
                 TextArea taTest = new TextArea(s);
                 taTest.setEditable(false);
@@ -648,8 +648,8 @@ public class EntrerEchantillon extends Application{
                         Ce test permet de tester un éventuel effet d’une variable explicative x sur une variable expliquée y.
                         H0 : x n’influence pas y
                         Notation des indices de degré de liberté : a=nombre d’échantillons (=2) ; n = la taille des échantillons
-                        Etapes / Détail calcul :
-                        Calculs des moyennes, variances des deux échantillons, covariance, sct(x)
+                        Etapes / Détail des calculs :
+                        Calculs des moyennes, variances des deux échantillons, de la covariance, de sct de x
                         SCT : ∑(Xi-Xmoy)²
                         Calcul de l’équation de la droite des moindres carrés y=B1*x+B0 (obtenue à part des données empirique de x et de y)
                         B1 : cov(x,y)/var(x)
@@ -664,7 +664,7 @@ public class EntrerEchantillon extends Application{
                         SCE : SCT(x)-SCM ou ∑ (Yi -Yi estimé) ²
                         F : (SCM*taille-2) /SCE
                         Puis récupération du quantile théorique en fonction des degrés de liberté d’une loi de Fischer : a-1, n -2.
-                        Comparaison de F et du quantile théorique (1, n-2) : Si  F > au quantile : On rejette H0 : x a un effet sur y, sinon one ne rejette pas H0.
+                        Comparaison de F et du quantile théorique (1, n-2) : Si  F > au quantile : On rejette H0 : x a un effet sur y, sinon on ne rejette pas H0.
                         """;
                 TextArea taCRL = new TextArea(s);
                 taCRL.setEditable(false);
@@ -683,20 +683,19 @@ public class EntrerEchantillon extends Application{
                 Label lblCA = new Label("Test d'anova à un facteur");
                 lblCA.setAlignment(Pos.CENTER);
                 String s = """
-                        Test d’anova à un facteur : Quoi, pourquoi, H0, étapes, conditions
                         Ce test permet de tester l’égalité des moyennes d’un groupe d’échantillons.
                         H0 : égalité des moyennes, H1 : non. Il s’agit donc d’un test bilatéral\s
                         Etapes :
-                        Calcul variance et moyenne de chaque échantillon
+                        Calcul de la variance et de la moyenne de chaque échantillon
                         Notation des indices de degré de liberté : a=nombre d’échantillons ;
                         t = taille des échantillons ; n = nombre total de valeurs : a*t
-                        Détail calcul :\s
+                        Détails des calculs :\s
                         Calcul de l’indice de Ficher F :
                         SCE : somme des variances
-                        SCM : t * ∑(moyenne(i)-moyenne tt) ²
+                        SCM : t * ∑(moyenne(i)-moyenne totale) ²
                         F : (SCM /(a-1))/(SCE/(n-a))
                         Comparaison de F et du quantile théorique(a-1,n-a) :\s
-                        Si F est < au quantile : On ne rejette pas H0 :  égalité des moyennes
+                        Si F est < au quantile : On ne rejette pas H0 : il y a égalité des moyennes
                         """;
                 TextArea taTest = new TextArea(s);
                 taTest.setEditable(false);
@@ -727,9 +726,9 @@ public class EntrerEchantillon extends Application{
                         "                      - 80% des valeurs théoriques doivent être >=5.\n" +
                         "\n" +
                         "Puis calcul de la distance avec les valeurs empiriques :\n" +
-                        "Calcul de la distance d = ∑ (i = 0 à n) (val empirique(i) – val théorique(i)) ²/ val théorique(i)\n" +
+                        "Calcul de la distance d = ∑ (i = 0 à n) (valeur empirique(i) – valeur théorique(i)) ²/ valeur théorique(i)\n" +
                         "La distance suit asymptotiquement une loi de chi2 à (i-1)*(j-1) degré de liberté,\n" +
-                        " où i = le nombre échantillons (2) et j  le nombre de valeurs par échantillons.\n" +
+                        " où i = le nombre échantillons (2) et j le nombre de valeurs par échantillons.\n" +
                         "\n" +
                         "Comparaison de d et de la valeur théorique de la table du chi2 à (1, n-1) : \n" +
                         "Si d <= valeur théorique chi2 : On rejette H0 : X et Y ne sont pas indépendants.\n";

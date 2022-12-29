@@ -31,7 +31,11 @@ public class QCM extends Application {
        // gp.setMaxSize(400,300);
 
         Label lblDebut = new Label("    Testez-vous");
-        TextArea taDebut = new TextArea("Bla bla bla");
+        TextArea taDebut = new TextArea("Nous vous proposons de vous tester à l'aide d'un qcm:\n" +
+                "Les questions portent uniquement sur les 4 fiches présentent sur cette interface\n" +
+                "Il peut il y avoir une ou plusieurs bonne réponse par question :\n" +
+                "Chaque bonne réponse vaut un point, tandis qu'un oubli vaut 0\n" +
+                "et qu'une mauvaise réponse vaut -1");
         taDebut.setMaxHeight(200);
         taDebut.setEditable(false);
         Button btnDebut = new Button("Commencer");
@@ -148,7 +152,11 @@ public class QCM extends Application {
         btnDebut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                bpBtn.setRight(btnS1);
+                bpBtn.setCenter(ta1);
+                bpBtn.setLeft(btnVerif1);
                 gp.setCenter(gp1);
+                btnVerif1.setVisible(true);
                 gp.setBottom(bpBtn);
             }});
         btnVerif1.setOnAction(new EventHandler<ActionEvent>() {
@@ -161,7 +169,7 @@ public class QCM extends Application {
                 if(q1c.isSelected()==true)compteur--;
                 if(q1d.isSelected()==true)compteur++;
                 if(q1e.isSelected()==true)compteur--;
-                ta1.setText("Réponse : a"+"\nScore depuis le début : "+compteur);
+                ta1.setText("Réponse : a,d"+"\nScore depuis le début : "+compteur);
             }});
         btnS1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -169,8 +177,9 @@ public class QCM extends Application {
                ta1.setText("");
                gp.setCenter(gp2);
                bpBtn.setLeft(btnVerif2);
+               btnVerif2.setVisible(true);
                bpBtn.setRight(btnS2);
-
+               btnS1.setVisible(false);
             }});
         btnVerif2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -182,7 +191,7 @@ public class QCM extends Application {
                 if(q2c.isSelected()==true)compteur++;
                 if(q2d.isSelected()==true)compteur++;
                 if(q2e.isSelected()==true)compteur--;
-                ta1.setText("Réponse : a"+"\nScore depuis le début : "+compteur);
+                ta1.setText("Réponse : b,c,d"+"\nScore depuis le début : "+compteur);
             }});
         btnS2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -191,7 +200,8 @@ public class QCM extends Application {
                 gp.setCenter(gp3);
                 bpBtn.setLeft(btnVerif3);
                 bpBtn.setRight(btnS3);
-
+                btnVerif3.setVisible(true);
+                btnS2.setVisible(false);
             }});
         btnVerif3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -202,7 +212,7 @@ public class QCM extends Application {
                 if(q3b.isSelected()==true)compteur--;
                 if(q3c.isSelected()==true)compteur--;
                 if(q3d.isSelected()==true)compteur++;
-                ta1.setText("Réponse : a"+"\nScore depuis le début : "+compteur);
+                ta1.setText("Réponse : d"+"\nScore depuis le début : "+compteur);
             }});
         btnS3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -211,7 +221,8 @@ public class QCM extends Application {
                 gp.setCenter(gp4);
                 bpBtn.setLeft(btnVerif4);
                 bpBtn.setRight(btnS4);
-
+                btnVerif4.setVisible(true);
+                btnS3.setVisible(false);
             }});
 
         btnVerif4.setOnAction(new EventHandler<ActionEvent>() {
@@ -224,7 +235,7 @@ public class QCM extends Application {
                 if(q4c.isSelected()==true)compteur--;
                 if(q4d.isSelected()==true)compteur--;
                 if(q4e.isSelected()==true)compteur++;
-                ta1.setText("Réponse : a"+"\nScore depuis le début : "+compteur);
+                ta1.setText("Réponse : a,e"+"\nScore depuis le début : "+compteur);
             }});
         btnS4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -233,7 +244,8 @@ public class QCM extends Application {
                 gp.setCenter(gp5);
                 bpBtn.setLeft(btnVerif5);
                 bpBtn.setRight(btnS5);
-
+                btnVerif5.setVisible(true);
+                btnS4.setVisible(false);
             }});
         btnVerif5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -245,7 +257,7 @@ public class QCM extends Application {
                 if(q5c.isSelected()==true)compteur--;
                 if(q5d.isSelected()==true)compteur--;
                 if(q5e.isSelected()==true)compteur++;
-                ta1.setText("Réponse : a"+"\nScore depuis le début : "+compteur);
+                ta1.setText("Réponse : b,e"+"\nScore depuis le début : "+compteur);
             }});
         btnS5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -253,7 +265,8 @@ public class QCM extends Application {
                 ta1.setText("");
                 gp.setCenter(taDebut);
                 gp.setBottom(btnDebut);
-
+                btnS5.setVisible(false);
+                compteur=0;
             }});
 
         primaryStage.show();
