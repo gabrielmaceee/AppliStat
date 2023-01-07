@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Scene xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.statface.guistatface.StatfaceV2">
+   <root>
+      <AnchorPane prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <SplitPane dividerPositions="0.40404040404040403" orientation="VERTICAL" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5, 0.5" layoutX="25.0" layoutY="17.0" prefHeight="798.0" prefWidth="481.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                              <AnchorPane prefHeight="317.0" prefWidth="403.0">
+                                 <children>
+                                    <BorderPane prefHeight="317.0" prefWidth="509.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <top>
+                                          <Label text="Les échantillons" BorderPane.alignment="CENTER" />
+                                       </top>
+                                       <center>
+                                          <AnchorPane prefHeight="299.0" prefWidth="437.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <AnchorPane prefHeight="299.0" prefWidth="515.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <TableView layoutX="158.0" layoutY="27.0" prefHeight="299.0" prefWidth="515.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="33.0" />
+                                                          <TableColumn prefWidth="117.0" text="NOM echantillon" />
+                                                            <TableColumn prefWidth="364.0" text="Liste données" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <BorderPane prefHeight="317.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <center>
+                                          <TextArea prefHeight="273.0" prefWidth="203.0" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <bottom>
+                                          <TextField editable="false" BorderPane.alignment="CENTER" />
+                                       </bottom>
+                                       <top>
+                                          <Label text="Création d'échantillons" BorderPane.alignment="CENTER" />
+                                       </top></BorderPane>
+                                 </children></AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" />
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="350.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5, 0.5" layoutX="6.0" layoutY="67.0" prefHeight="798.0" prefWidth="711.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TabPane prefHeight="395.0" prefWidth="479.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <tabs>
+                                        <Tab text="Fonctions sur un échantillon">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ButtonBar layoutX="38.0" layoutY="126.0" prefHeight="440.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <buttons>
+                                                          <Button mnemonicParsing="false" text="Button" />
+                                                            <Button mnemonicParsing="false" text="Button" />
+                                                        </buttons>
+                                                      </ButtonBar>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Fonctions sur plusieurs échantillons">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ButtonBar layoutX="23.0" layoutY="46.0" prefHeight="440.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <buttons>
+                                                          <Button mnemonicParsing="false" text="Button" />
+                                                        </buttons>
+                                                      </ButtonBar>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <top>
+                                          <Label text="Résultats :" BorderPane.alignment="CENTER" />
+                                       </top>
+                                       <center>
+                                          <TextArea minWidth="300.0" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <bottom>
+                                          <TextField editable="false" BorderPane.alignment="CENTER" />
+                                       </bottom>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Accordion layoutX="14.0" layoutY="61.0" prefHeight="471.0" prefWidth="439.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <panes>
+                                        <TitledPane animated="false" text="Lest tests statistiques">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Régression linéaire">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Test ANOVA">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TitledPane animated="false" text="Tests d'indépendance du chi2">
+                                                        <content>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                        </content>
+                                                      </TitledPane>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </TitledPane>
+                                      </panes>
+                                    </Accordion>
+                                 </children></AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </root>
+</Scene>

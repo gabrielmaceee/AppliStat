@@ -55,7 +55,7 @@ public class EchantillonQuantitatif extends EchantillonAbstrait<Double> {
      * @throws ExceptionDonneesEntree
      * @deprecated avec le tableau -> perte de données
      */
-    public  EchantillonQuantitatif(String nomEchantillon,double[]  values) throws ExceptionDonneesEntree {
+    public EchantillonQuantitatif(String nomEchantillon,double[]  values) throws ExceptionDonneesEntree {
         this(nomEchantillon,
                 Arrays.toString(values)
                         .substring(1,values.length - 1)
@@ -200,11 +200,11 @@ public class EchantillonQuantitatif extends EchantillonAbstrait<Double> {
         Echantillon v1 = new Echantillon(i1);
         String s2 = echGenerator.toString();
         try {
-            EchantillonQuantitatif v2 = new EchantillonQuantitatif("echantillon S2 via String",s2);
-            EchantillonQuantitatif tab1 = new EchantillonQuantitatif("echantillon t1 via tableau",i1);
+            EchantillonQuantitatif v2 = new EchantillonQuantitatif("échantillon S2 via String",s2);
+            EchantillonQuantitatif tab1 = new EchantillonQuantitatif("échantillon t1 via tableau",i1);
             EchantillonQuantitatif listQuantity =
-                    new EchantillonQuantitatif("ls1 via ArrayList",ls1);
-            System.out.println("tableau i1 : " + Arrays.toString(i1));
+                    new EchantillonQuantitatif("échantillon ls1 via ArrayList",ls1);
+            System.out.println("tableau i1 : " + Arrays.toString(i1) );
             System.out.println(tab1.toString());
             System.out.println(v2.toString());
             System.out.println(v1.toString());
@@ -213,9 +213,8 @@ public class EchantillonQuantitatif extends EchantillonAbstrait<Double> {
             for(int i = 0; i<5; i++) {
                 System.out.println(v2.getQuartiles(i));
             }
-        }
-        catch(Exception de){
-            System.out.println(de.getMessage());
+        } catch(Exception de) {
+            System.err.println(de.getMessage());
         }
     }
 }

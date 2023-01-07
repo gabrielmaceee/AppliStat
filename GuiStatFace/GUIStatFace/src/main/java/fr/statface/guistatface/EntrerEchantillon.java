@@ -735,7 +735,7 @@ public class EntrerEchantillon extends Application{
 
         });
 
-        // TODO: debugger cette fonction
+
         btnSuppr.setOnAction(
                 e -> {
 

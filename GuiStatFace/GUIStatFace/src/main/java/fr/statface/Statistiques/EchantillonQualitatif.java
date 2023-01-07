@@ -7,10 +7,12 @@ public class EchantillonQualitatif extends EchantillonAbstrait<String> {
     private final ArrayList<String> donnees = new ArrayList<String>();
     protected ArrayList<String> donneesTriees;
 
+    protected final HashSet<String> donneesUniques = new HashSet<String>();
 
-    public EchantillonQualitatif(String s, String donnees) throws ExceptionDonneesEntree {
-        super(s.split(":")[0]);
-        this.donnees.addAll(Arrays.asList(donnees.split(";")));
+    public EchantillonQualitatif(String nomVariable, String values) throws ExceptionDonneesEntree {
+        super(nomVariable);
+        this.donnees.addAll(Arrays.asList(values.split(";")));
+        donneesUniques.addAll(this.donnees);
     }
 
     protected void instanciationTrie(){
