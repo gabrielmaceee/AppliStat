@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-11-10" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3246" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-07-01" view-index="0" gantt-divider-location="609" resource-divider-location="300" version="3.2.3247" locale="fr_FR">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="200" order="0"/>
-        <field id="tpd4" name="Date de début" width="75" order="1"/>
-        <field id="tpd5" name="Date de fin" width="75" order="2"/>
+    <view zooming-state="default:9" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="271" order="0"/>
+        <field id="tpd4" name="Date de début" width="195" order="1"/>
+        <field id="tpd5" name="Date de fin" width="127" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent">
-            <![CDATA[#ffffff]]>
+            <![CDATA[#000000 #873600 #00ff00 #84d300 #0000ff #87f000 #00f4f4 #00f4f4 #00ffff #f4f4f4]]>
         </option>
     </view>
     <view id="resource-table">
@@ -37,22 +37,27 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="échéancier" color="#8cb6ce" meeting="false" start="2022-09-29" duration="5" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
-        <task id="14" name="cahier des charges" color="#8cb6ce" meeting="false" start="2022-09-29" duration="5" complete="0" thirdDate="2022-09-22" thirdDate-constraint="0" expand="true"/>
-        <task id="13" name="esquisses" color="#8cb6ce" meeting="false" start="2022-09-29" duration="5" complete="0" thirdDate="2022-09-22" thirdDate-constraint="0" expand="true"/>
-        <task id="1" name="Structure du code + schéma UML + Gantt" color="#8cb6ce" meeting="false" start="2022-10-06" duration="5" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
-        <task id="2" name="début code" color="#8cb6ce" meeting="false" start="2022-10-13" duration="12" complete="0" thirdDate="2022-10-14" thirdDate-constraint="0" expand="true"/>
-        <task id="15" name="création interface test" color="#8cb6ce" meeting="false" start="2022-10-13" duration="12" complete="0" thirdDate="2022-09-22" thirdDate-constraint="0" expand="true"/>
-        <task id="3" name="sous tâche code" color="#8cb6ce" meeting="false" start="2022-10-20" duration="5" complete="0" thirdDate="2022-10-20" thirdDate-constraint="0" expand="true"/>
-        <task id="4" name="finalisation code" color="#8cb6ce" meeting="false" start="2022-10-27" duration="2" complete="0" thirdDate="2022-10-27" thirdDate-constraint="0" expand="true"/>
+        <task id="20" name="Conception" color="#000000" meeting="false" start="2022-09-29" duration="51" complete="0" thirdDate="2022-09-28" thirdDate-constraint="0" expand="true"/>
+        <task id="14" name="Ecriture d'un cahier des charges" color="#873600" meeting="false" start="2022-09-29" duration="51" complete="0" thirdDate="2022-09-22" thirdDate-constraint="0" expand="true"/>
+        <task id="0" name="Création d'un échéancier" color="#00ff00" meeting="false" start="2022-09-29" duration="5" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="Commencer esquisses code" color="#000000" meeting="false" start="2022-09-29" duration="5" complete="0" thirdDate="2022-09-22" thirdDate-constraint="0" expand="true"/>
+        <task id="17" name="Création et Modification Gantt" color="#873600" meeting="false" start="2022-10-06" duration="36" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="1" name="Structurer code" color="#00ff00" meeting="false" start="2022-10-06" duration="5" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="16" name="Conception schéma UML" color="#00ff00" meeting="false" start="2022-10-06" duration="5" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="Réalisation" color="#000000" meeting="false" start="2022-10-14" duration="46" complete="0" thirdDate="2022-09-28" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="Ajouter class RegressionLineaire" color="#84d300" meeting="false" start="2022-10-14" duration="6" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="2" name="Ajouter Class Anova" color="#00ff00" meeting="false" start="2022-10-20" duration="16" complete="0" thirdDate="2022-10-14" thirdDate-constraint="0" expand="true"/>
+        <task id="4" name="Ajouter Class CSVReader" color="#873600" meeting="false" start="2022-10-20" duration="16" complete="0" thirdDate="2022-10-27" thirdDate-constraint="0" expand="true"/>
+        <task id="3" name="Ajouter Class Chi2" color="#00f4f4" meeting="false" start="2022-10-20" duration="6" complete="0" thirdDate="2022-10-20" thirdDate-constraint="0" expand="true"/>
         <task id="6" name="interruption pédagogique" color="#ffffff" meeting="false" start="2022-10-31" duration="5" complete="0" thirdDate="2022-10-31" thirdDate-constraint="0" expand="true"/>
-        <task id="5" name="début interface" color="#8cb6ce" meeting="false" start="2022-11-07" duration="3" complete="0" thirdDate="2022-11-07" thirdDate-constraint="0" expand="true"/>
-        <task id="7" name="" color="#8cb6ce" meeting="false" start="2022-11-10" duration="5" complete="0" thirdDate="2022-11-10" thirdDate-constraint="0" expand="true"/>
-        <task id="8" name="" color="#8cb6ce" meeting="false" start="2022-11-17" duration="5" complete="0" thirdDate="2022-11-17" thirdDate-constraint="0" expand="true"/>
-        <task id="9" name="Qcm" color="#8cb6ce" meeting="false" start="2022-11-24" duration="5" complete="0" thirdDate="2022-11-24" thirdDate-constraint="0" expand="true"/>
-        <task id="10" name="Code" color="#8cb6ce" meeting="false" start="2022-12-01" duration="5" complete="0" thirdDate="2022-12-01" thirdDate-constraint="0" expand="true"/>
-        <task id="11" name="Interface" color="#8cb6ce" meeting="false" start="2022-12-08" duration="5" complete="0" thirdDate="2022-12-08" thirdDate-constraint="0" expand="true"/>
-        <task id="12" name="Diffusion application" color="#8cb6ce" meeting="false" start="2022-12-15" duration="6" complete="0" thirdDate="2022-12-15" thirdDate-constraint="0" expand="true"/>
+        <task id="5" name="Débuter interface" color="#00ff00" meeting="false" start="2022-11-10" duration="31" complete="0" thirdDate="2022-11-07" thirdDate-constraint="0" expand="true"/>
+        <task id="18" name="Ajouter Class Echantillon" color="#000000" meeting="false" start="2022-11-14" duration="11" complete="0" thirdDate="2022-09-29" thirdDate-constraint="0" expand="true"/>
+        <task id="7" name="Ajouter Graphique Histogramme/Nuage De Points/Courbe" color="#873600" meeting="false" start="2022-11-24" duration="5" complete="0" thirdDate="2022-11-10" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Concevoir Qcm" color="#0000ff" meeting="false" start="2022-11-24" duration="5" complete="0" thirdDate="2022-11-24" thirdDate-constraint="0" expand="true"/>
+        <task id="10" name="Finir Code" color="#873600" meeting="false" start="2022-12-01" duration="11" complete="0" thirdDate="2022-12-01" thirdDate-constraint="0" expand="true"/>
+        <task id="11" name="Finir Interface" color="#00ff00" meeting="false" start="2022-12-08" duration="6" complete="0" thirdDate="2022-12-08" thirdDate-constraint="0" expand="true"/>
+        <task id="22" name="Tester" color="#000000" meeting="false" start="2022-12-15" duration="6" complete="0" thirdDate="2022-09-28" thirdDate-constraint="0" expand="true"/>
+        <task id="12" name="Diffuser" color="#000000" meeting="false" start="2022-12-15" duration="6" complete="0" thirdDate="2022-12-15" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="" function="Default:0" contacts="" phone=""/>
