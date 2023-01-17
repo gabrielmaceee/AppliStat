@@ -55,6 +55,14 @@ public class RegressionLineaire {
         return(s+"Au seuil 5%, on ne peut pas rejeter H0 : x n'a pas d'effet sur y");
         //return false;
     }
+    double[] getReg(){
+        int i = vi.taille;
+        double[] reg = new double[i];
+        double beta0=getBeta0(),beta1=getBeta1();
+        for(int x=0;x<i;x++)reg[x]=beta1*x+beta0;
+        return reg;
+    }
+    
     double[] getYjust(){
         double[] yjust = new double[vi.taille];
         int k=0;
