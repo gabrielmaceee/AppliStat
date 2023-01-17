@@ -818,9 +818,7 @@ public class EntrerEchantillon extends Application{
                 stage.show();
 
             }});
-        primaryStage.show();
-    }
-      
+  
         QCM.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
