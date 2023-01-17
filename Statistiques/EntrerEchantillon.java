@@ -745,69 +745,81 @@ public class EntrerEchantillon extends Application{
 
             @Override
             public void handle(ActionEvent e) {
+                SplitPane splitPane1;
                 Stage stage = new Stage();
-                Stage stage2 = new Stage();
-                int compteur=0;
-                Echantillon vi  = tabEch[0];
-                int[] compt= new int[12];
-                for(CheckBox tb:tabBtn){
-                    if(tb.isSelected()) compt[compteur]=1;
+                int compteur = 0;
+                Echantillon vi = tabEch[0];
+                Echantillon vi2 = tabEch[0];
+                int[] compt = new int[12];
+                for (CheckBox tb : tabBtn) {
+                    if (tb.isSelected()) compt[compteur] = 1;
                     compteur++;
                 }
                 compteur = 0;
                 stage.setTitle("Bar Chart Sample");
-                stage2.setTitle("Regression linéaire");
-                final NumberAxis xAxis = new NumberAxis();
-                final NumberAxis yAxis = new NumberAxis();
-                final NumberAxis xAxis1 = new NumberAxis();
-                final NumberAxis yAxis2 = new NumberAxis();
-                yAxis.setLabel("Y");
-                xAxis.setLabel("X");
-                yAxis2.setLabel("Y");
-                xAxis1.setLabel("X");
-                final ScatterChart<Number,Number> bc =
-                        new ScatterChart<>(xAxis,yAxis);
-                bc.setTitle("Nuage de points");
-                final LineChart<Number,Number> lc =
-                        new LineChart<>(xAxis1,yAxis2);
-                for(int i=0;i<compt.length;i++) {
-                    if(compt[i]!=0) {
-                        compteur++;
-                        Echantillon dl = tabEch[i];
-                        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-                        for (int k = 0; k < dl.taille; k++) {
-                            series.getData().add(new XYChart.Data<>(k, dl.donnees.get(k)));
-                        }
-                        series.setName("Echantillon n°" + i);
-                        if(compteur==1){
-                            vi=dl;
-                        }
-                        if(compteur==2){
-                            try {
-                                RegressionLineaire RL = new RegressionLineaire(vi, dl);
-                                Echantillon rl = new Echantillon(RL.getYjust());
-                                LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
-                                for(int k=0;k<rl.taille;k++){
-                                    series1.getData().add(new LineChart.Data(k, rl.donnees.get(k)));
-                                }
-                                lc.getData().add(series1);
-                            } catch (ExceptionTailleEchantillon ex) {
-                                ecran.setText("taille des échantillons différentes");
-                            }
-                        }
-                        series.getData().add(new XYChart.Data(dl.taille + 2, dl.getMoyenne()));
-                        series.getData().add(new XYChart.Data(dl.taille + 3, dl.getMediane()));
-                        bc.getData().add(series);
+                double min=0;
+                double max=0;
+                int maxl=0;
+                for(Echantillon v:tabEch){
+                    if(v!=null) {
+                        min = Math.min(min, v.getMinimum());
+                        max = Math.max(max, v.getMaximum());
+                        maxl = Math.max(maxl,v.taille);
                     }
                 }
-                Scene scene  = new Scene(bc,800,600);
-                Scene scene1  = new Scene(lc,800,600);
+                final NumberAxis xAxis = new NumberAxis(0,maxl,(int)(maxl/5));
+                final NumberAxis yAxis = new NumberAxis((int)min-1,(int) max+1,(max-min)/5);
+                final NumberAxis xAxis1 = new NumberAxis(0,maxl,(int)(maxl/5));
+                final NumberAxis yAxis2 = new NumberAxis((int)min-1,(int)max+1,(max-min)/5);
+                final ScatterChart<Number, Number> bc = new ScatterChart<>(xAxis, yAxis);
+                for (int i = 0; i < compt.length; i++) {
+                    if (compt[i] != 0) {
+                        compteur++;
+                        Echantillon dl = tabEch[i];
+                        XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
+                        for (int k = 0; k < dl.taille; k++) {
+                            series1.getData().add(new XYChart.Data<>(k, dl.donnees.get(k)));
+                        }
+                        if (compteur == 1) vi = dl;
+                        if (compteur == 2) vi2 = dl;
+                        bc.getData().add(series1);
+                    }
+            }
+                    final LineChart<Number, Number> lc = new LineChart<>(xAxis1, yAxis2);
+                    if (compteur == 2) {
+                        try {
+                        RegressionLineaire RL = new RegressionLineaire(vi, vi2);
+                        Echantillon rl = new Echantillon(RL.getYjust());
+                        Echantillon rld = new Echantillon(RL.getReg());
+                        LineChart.Series<Number, Number> series2 = new LineChart.Series<>();
+                        LineChart.Series<Number, Number> series3 = new LineChart.Series<>();
+                        for (int k = 0; k < rl.taille; k++) {
+                            series2.getData().add(new LineChart.Data(k, rl.donnees.get(k)));
+                            series3.getData().add(new LineChart.Data(k, rld.donnees.get(k)));
+                        }
+                        lc.getData().add(series2);
+                        lc.getData().add(series3);
+                    } catch(ExceptionTailleEchantillon ex){
+                        ecran.setText("taille des échantillons différentes");
+                    }
+                }
+                lc.setLegendVisible(false);
+                    bc.setLegendVisible(false);
+                splitPane1 = new SplitPane();
+                StackPane stackpane = new StackPane();
+                stackpane.getChildren().add(bc);
+                stackpane.getChildren().add(lc);
+                lc.opacityProperty().set(.4);
+                splitPane1.setOrientation(Orientation.VERTICAL);
+                splitPane1.getItems().addAll(stackpane);
+                splitPane1.setDividerPosition(0, 1);
+                Scene scene = new Scene(stackpane, 800, 600);
                 stage.setScene(scene);
-                stage2.setScene(scene1);
                 stage.show();
-                stage2.show();
 
-        }});
+            }});
+        primaryStage.show();
+    }
       
         QCM.setOnAction(new EventHandler<ActionEvent>() {
             @Override
