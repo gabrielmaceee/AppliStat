@@ -1,15 +1,30 @@
 package com.example.statistiques;
 
+/**
+ * class permettant de tester la normalité des erreurs d'un echantillon
+ */
 public class TestNormalite {
+    /**
+     * l'échantillon a vérifier
+     */
     Echantillon e;
+    /**
+     * taille de l'échantillon
+     */
     int taille;
 
+    /**
+     * @param ech : l'echantillon à vérifier
+     */
     //H0 : les donn�es suivent une loi normale
     TestNormalite(Echantillon ech) {
         e = ech;
         this.taille = ech.getTaille();
     }
 
+    /** calcul l'indice S
+     * @return S
+     */
     double getS() {
         double S1 = 0;
         double S2 = 0;
@@ -23,6 +38,9 @@ public class TestNormalite {
         return (S1 / S2);
     }
 
+    /** calcul l'indice K
+     * @return K
+     */
     double getK() {
         double S1 = 0;
         double S2 = 0;
@@ -36,12 +54,20 @@ public class TestNormalite {
         return (S1 / S2);
     }
 
-    double getJB() {
+    /** calcul l'indice JB en focntion de S et K
+     * @return JB
+     */
+     double getJB() {
         double JB = (Math.pow(getS(), 2));
         JB += (Math.pow(getK() - 3, 2)) / 4;
         return (JB / 6) * taille;
     }
 
+    /** donne la zone de rejet en fonction de taille
+     * @return la décision de rejeter ou non H0, dans un boolean
+     * false : on rejete H0 : les donnees ne suivent pas une loi normale
+     * true : on ne rejette pas H0 : les donnees suivent bien une loi normale
+     */
     boolean decision() {
         double pvalue = 0.1461;
         if (taille < 20) pvalue = 0.109;

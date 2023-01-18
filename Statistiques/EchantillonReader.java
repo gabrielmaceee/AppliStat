@@ -7,14 +7,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+/**
+ * class permettant de creer un echantillon à partir d'un fichier txt ou csv
+ */
 public class EchantillonReader {
+    /**
+     * chemin vers le fichier
+     */
     private final String File;
+    /**
+     * compteur du nombre d'échantillons'
+     */
     private int compteur;
+
+    /**
+     * @param chemin : chemin vers le fichier à lire
+     */
     public EchantillonReader(String chemin) {
         this.File =chemin;
         System.out.println(File);
     }
 
+    /**
+     * lit le fichier et creer un tableau de string contenant les donnees
+     * @return un tableau de string contenant chacune une donnée
+     * @throws ExceptionDonneesEntree : si le fichier n'est ni un csv, ni un txt, ni rempli
+     */
     public String[] EchantillonToString() throws ExceptionDonneesEntree {
         String line;
         int p = getCompteur();
@@ -58,6 +76,9 @@ public class EchantillonReader {
        throw new ExceptionDonneesEntree();
     }
 
+    /**
+     * @return compteur
+     */
     public int getCompteur(){
         String type = File.substring(File.indexOf('.'));
         try (BufferedReader br = new BufferedReader(new FileReader(File))) {

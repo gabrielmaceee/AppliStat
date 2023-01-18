@@ -15,11 +15,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
+/**
+ * class contenant les qcm de l'interface graphique
+ */
 public class QCM extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    /**
+     * note de l'utilisateur au qcm
+     */
     public int compteur = 0;
     @Override
     public void start(Stage primaryStage) {

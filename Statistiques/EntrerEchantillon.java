@@ -3,20 +3,15 @@ package com.example.statistiques;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -26,8 +21,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * class principale de l'interface graphique
+ */
 public class EntrerEchantillon extends Application{
+    /**
+     * tableau contenant les echantillons de l'utilisateur
+     */
     Echantillon[] tabEch = new Echantillon[12];
+    /**
+     * compteur du nombre d'échantillon
+     */
     int compteur = 0;
     public void start(Stage primaryStage)  {
         primaryStage.setTitle("Coucou");
@@ -315,7 +319,8 @@ public class EntrerEchantillon extends Application{
                         }
                     }
                 } catch (ExceptionDonneesEntree ex) {
-                    throw new RuntimeException(ex);
+                    actiontarget.setFill(Color.RED);
+                    actiontarget.setText("L'échantillon " + (compteur+1) + " n'a pas pu être créé :\n"+ ex.getMessage());
                 }
 
             }
@@ -818,7 +823,8 @@ public class EntrerEchantillon extends Application{
                 stage.show();
 
             }});
-  
+
+      
         QCM.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -832,6 +838,7 @@ public class EntrerEchantillon extends Application{
         //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
+
     public static void main(String[] args) {
         launch(args);
     }

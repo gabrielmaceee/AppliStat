@@ -1,15 +1,40 @@
 package com.example.statistiques;
 
-
+/**
+ * classe permettant de realiser un test d'anova
+ */
 public class Anova{
+    /**
+     * tableau des échantillons de l'utilisateurs
+     */
     Echantillon [] tabEchantillons;
 
-    int a;//nombre total d'échantillons
-    int t; //taille des échantillons
-    int n; //nombre total de données
+    /**
+     * nombre total d'échantillons
+     */
+    int a;
+    /**
+     * taille des échantillons
+     */
+    int t;
+    /**
+     * nombre total de données
+     */
+    int n;
+    /**
+     * tableau des moyennes
+     */
     double [] tabMoyennes;
+    /**
+     * tableau des variances
+     */
     double [] tabVariances;
 
+    /**
+     * @param tab : un tableau des échantillons de l'utilisateurs
+     * @throws ExceptionTailleEchantillon : si les echantillons sont de differentes tailles
+     * @throws ExceptionNombreEchantillons : si il y a moins de 2 echantillons
+     */
     Anova (Echantillon[] tab) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons{
             if (tab.length < 2) {
                 throw new ExceptionNombreEchantillons();
@@ -28,6 +53,10 @@ public class Anova{
                 }
     }
 
+    /**
+     * calcul la somme du carré des erreurs
+     * @return sce
+     */
     double getSCE() {
         double SCE = 0;
         for(int i = 0; i<a; i++) {
@@ -36,6 +65,10 @@ public class Anova{
         return SCE;
     }
 
+    /**
+     * calcul la somme du carré du modèle
+     * @return scm
+     */
     double getSCM() {
         double SCM = 0;
         double moyenneTotale = 0;
@@ -49,10 +82,17 @@ public class Anova{
         return SCM;
     }
 
+    /**
+     * calcul l'indice de Fischer empirique
+     * @return F
+     */
     double getF() {
         return (getSCM()/ (a-1))/(getSCE()/(n-a));
     }
 
+    /** compare l'indice de Fisher à la zone de rejet issue des tables
+     * @return la décision de rejetter H0 ou non, dans une string
+     */
     String decision() {
         CSVFisherReader csv  = new CSVFisherReader();
         String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(a-1,n-a)+"\n";
@@ -64,6 +104,9 @@ public class Anova{
         //return false;
     }
 
+    /**
+     * @return les échantillons dans une string
+     */
     public String toString() {
         String s = "";
         for( int i = 0; i<a; i++) {
