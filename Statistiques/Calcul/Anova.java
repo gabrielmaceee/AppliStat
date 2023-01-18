@@ -1,51 +1,55 @@
-package com.example.statistiques;
+package Statistiques.Calcul;
+
+import Statistiques.Exception.ExceptionNombreEchantillons;
+import Statistiques.Exception.ExceptionTailleEchantillon;
+import Statistiques.Lecture.CSVFisherReader;
 
 /**
  * classe permettant de realiser un test d'anova
  */
 public class Anova{
     /**
-     * tableau des échantillons de l'utilisateurs
+     * tableau des échantillons de l'utilisateur
      */
-    Echantillon [] tabEchantillons;
+    private  Echantillon [] tabEchantillons;
 
     /**
      * nombre total d'échantillons
      */
-    int a;
+    private int a;
     /**
      * taille des échantillons
      */
-    int t;
+    private int t;
     /**
      * nombre total de données
      */
-    int n;
+    private int n;
     /**
      * tableau des moyennes
      */
-    double [] tabMoyennes;
+    private double [] tabMoyennes;
     /**
      * tableau des variances
      */
-    double [] tabVariances;
+    private double [] tabVariances;
 
     /**
-     * @param tab : un tableau des échantillons de l'utilisateurs
+     * @param tab : un tableau des échantillons de l'utilisateur
      * @throws ExceptionTailleEchantillon : si les echantillons sont de differentes tailles
-     * @throws ExceptionNombreEchantillons : si il y a moins de 2 echantillons
+     * @throws ExceptionNombreEchantillons : s'il y a moins de 2 echantillons
      */
-    Anova (Echantillon[] tab) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons{
+    public Anova(Echantillon[] tab) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons {
             if (tab.length < 2) {
                 throw new ExceptionNombreEchantillons();
             }
                 tabEchantillons = tab;
                 a = tab.length;
-                t = tabEchantillons[0].taille;
+                t = tabEchantillons[0].getTaille();
                 tabMoyennes = new double[a];
                 tabVariances = new double[a];
                 for (int i = 0; i < a; i++) {
-                    if (tabEchantillons[i].taille != t)
+                    if (tabEchantillons[i].getTaille() != t)
                         throw new ExceptionTailleEchantillon();
                     tabMoyennes[i] = tabEchantillons[i].getMoyenne();
                     tabVariances[i] = tabEchantillons[i].getVariance() * (t - 1);
@@ -93,12 +97,12 @@ public class Anova{
     /** compare l'indice de Fisher à la zone de rejet issue des tables
      * @return la décision de rejetter H0 ou non, dans une string
      */
-    String decision() {
+    public String decision() {
         CSVFisherReader csv  = new CSVFisherReader();
         String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(a-1,n-a)+"\n";
         if (getF()<csv.getQuantile(a-1,n-a)) {
             return (s +"Au seuil 5% on ne rejette pas H0");
-            //return true;//on rejette pas l'égalité des moyennes
+            //return true;//on ne rejette pas l'égalité des moyennes
         }
         return ( s+"Au seuil 5% on rejette H0");//vi explique significativement vd
         //return false;

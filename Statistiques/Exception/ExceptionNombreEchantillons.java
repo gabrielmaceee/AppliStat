@@ -1,7 +1,7 @@
-package com.example.statistiques;
+package Statistiques.Exception;
 
 /**
- * cette excpetion est levée si le nombre d'échantillons n'est pas respecté
+ * cette exception est levée si le nombre d'échantillons n'est pas respecté
  */
 public class ExceptionNombreEchantillons extends Exception{
     public ExceptionNombreEchantillons() {

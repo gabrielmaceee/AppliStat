@@ -1,4 +1,6 @@
-package com.example.statistiques;
+package Statistiques.Calcul;
+
+import Statistiques.Exception.ExceptionDonneesEntree;
 
 import java.util.*;
 
@@ -6,27 +8,30 @@ import java.util.*;
 /**
  * class permettant de créer et manipuler un echantillon
  */
-class Echantillon {
+public class Echantillon {
 
     /**
      * liste des donnees de l'echantillon
      */
-    List<Double> donnees;
+    private List<Double> donnees;
     /**
      * taille de l'échantillon
      */
-    int taille;
+    private int taille;
     /**
      * donnees triées dans l'ordre croissant
      */
-     List<Double> donneesTriees;
+     private List<Double> donneesTriees;
 
+    public List<Double> getDonnees() {
+        return donnees;
+    }
 
     /**
      * @param s : les donnees sous forme d'une string
      * @throws ExceptionDonneesEntree : n'accepte pas une string null ou de taille 0
      */
-    Echantillon(String s) throws ExceptionDonneesEntree{
+    public Echantillon(String s) throws ExceptionDonneesEntree {
 
         if (s == null || s.length() == 0) {throw new ExceptionDonneesEntree();}
 
@@ -49,7 +54,7 @@ class Echantillon {
     /**
      * @param TabDonnees : tableau de double contenant les donnees
      */
-    Echantillon(double[] TabDonnees) {
+    public Echantillon(double[] TabDonnees) {
         if(TabDonnees.length ==0) throw new IllegalArgumentException("le tableau est vide");
         donnees = new ArrayList<>();
         for(int i=0;i<TabDonnees.length;i++)this.donnees.add(TabDonnees[i]);
@@ -69,14 +74,14 @@ class Echantillon {
     /**
      * @return taille
      */
-    int getTaille(){
+    public int getTaille(){
         return taille;
     }
 
     /** calcul la moyenne
      * @return la moyenne
      */
-    double getMoyenne(){
+    public double getMoyenne(){
         double moyenne = 0;
         for(int i = 0; i<taille; i ++) {
             moyenne += donnees.get(i);
@@ -87,7 +92,7 @@ class Echantillon {
     /** calcul la variance de l'échantillon
      * @return la variance
      */
-    double getVariance(){
+    public double getVariance(){
         double var = 0;
         for(int i = 0; i<taille; i ++) {
             var += Math.pow((donnees.get(i)- getMoyenne()),2);
@@ -98,21 +103,21 @@ class Echantillon {
     /** calcul l'ecart-type
      * @return l'ecart type
      */
-    double getEcarttype(){
+    public double getEcarttype(){
         return Math.sqrt(getVariance());
     }
 
     /**
      * @return le maximum de l'echantillon
      */
-    double getMaximum(){
+    public double getMaximum(){
         return donneesTriees.get(taille-1);
     };
 
     /**
      * @return le minimum de l'echantillon
      */
-    double getMinimum() {
+    public double getMinimum() {
         return donneesTriees.get(0);
     };
 
@@ -121,7 +126,7 @@ class Echantillon {
      * cherche la frequence d'apparition de d dans l'échantillon
      * @return
      */
-    int getFrequence(double d){
+    public int getFrequence(double d){
         int c =0;
         for(int i = 0; i<taille; i++){
            if(d == (donnees.get(i))) c++;
@@ -132,7 +137,7 @@ class Echantillon {
     /** calcul la médiane
      * @return médiane
      */
-    double getMediane() {
+    public double getMediane() {
         if (taille % 2 ==1) return donneesTriees.get(taille/2);
         int m = taille/2 -1;
         if(m<0) return donneesTriees.get(0);
@@ -143,7 +148,7 @@ class Echantillon {
     /** calcul la somme des carrés totaux
      * @return sct
      */
-    double getSCT() {
+    public double getSCT() {
         double SCT = 0;
         for (int i =0; i<taille; i++) {
             SCT += Math.pow((donnees.get(i) -getMoyenne()),2);
@@ -155,7 +160,7 @@ class Echantillon {
      * @param quartile : le quartile que l'on veut recuperer
      * @return la valeur correspondant au quartile en question
      */
-    double getQuartiles(int quartile) {
+    public double getQuartiles(int quartile) {
         double result = 0;
         float b;
         float a = b = 0;

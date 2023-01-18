@@ -1,4 +1,6 @@
-package com.example.statistiques;
+package Statistiques.Calcul;
+
+import java.util.List;
 
 /**
  * class permettant de tester la normalité des erreurs d'un echantillon
@@ -7,11 +9,11 @@ public class TestNormalite {
     /**
      * l'échantillon a vérifier
      */
-    Echantillon e;
+    private Echantillon e;
     /**
      * taille de l'échantillon
      */
-    int taille;
+    private int taille;
 
     /**
      * @param ech : l'echantillon à vérifier
@@ -28,9 +30,10 @@ public class TestNormalite {
     double getS() {
         double S1 = 0;
         double S2 = 0;
+        List<Double> e2 = e.getDonnees();
         for (int i = 0; i < taille; i++) {
-            S1 += Math.pow((e.donnees.get(i) - e.getMoyenne()), 3);
-            S2 += Math.pow((e.donnees.get(i) - e.getMoyenne()), 2);
+            S1 += Math.pow((e2.get(i) - e.getMoyenne()), 3);
+            S2 += Math.pow((e2.get(i) - e.getMoyenne()), 2);
         }
 
         S1 = S1 / taille;
@@ -44,9 +47,10 @@ public class TestNormalite {
     double getK() {
         double S1 = 0;
         double S2 = 0;
+        List<Double> e2 = e.getDonnees();
         for (int i = 0; i < taille; i++) {
-            S1 += Math.pow((e.donnees.get(i) - e.getMoyenne()), 4);
-            S2 += Math.pow((e.donnees.get(i) - e.getMoyenne()), 2);
+            S1 += Math.pow((e2.get(i) - e.getMoyenne()), 4);
+            S2 += Math.pow((e2.get(i) - e.getMoyenne()), 2);
         }
 
         S1 = S1 / taille;

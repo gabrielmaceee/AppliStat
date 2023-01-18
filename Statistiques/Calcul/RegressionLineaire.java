@@ -1,4 +1,9 @@
-package com.example.statistiques;
+package Statistiques.Calcul;
+
+import Statistiques.Exception.ExceptionTailleEchantillon;
+import Statistiques.Lecture.CSVFisherReader;
+
+import java.util.List;
 
 /**
  * class permettant d'effectuer un test de regression lineaire
@@ -7,19 +12,19 @@ public class RegressionLineaire {
     /**
      * y,echantillon sensé être expliquée par x
      */
-    Echantillon vd;
+    private Echantillon vd;
     /**
      *  x, echantillon sensé avoir un effet sur y
      */
-    Echantillon vi;
+    private Echantillon vi;
 
     /**
      * @param vi echantillon de la vairable x
      * @param vd echantillon de la variable y
      * @throws ExceptionTailleEchantillon
      */
-    RegressionLineaire (Echantillon vi, Echantillon vd) throws ExceptionTailleEchantillon{
-        if (vi.taille != vd.taille) throw new ExceptionTailleEchantillon();
+    public RegressionLineaire(Echantillon vi, Echantillon vd) throws ExceptionTailleEchantillon {
+        if (vi.getTaille() != vd.getTaille()) throw new ExceptionTailleEchantillon();
         this.vd = vd;
         this.vi = vi;
     }
@@ -29,10 +34,11 @@ public class RegressionLineaire {
      */
     double getCov() {
         double cov =0;
-        for(int i =0; i<vd.taille; i++) {
-            cov += ((vi.donnees.get(i)-vi.getMoyenne())*(vd.donnees.get(i)-vd.getMoyenne()));
+        int k = vd.getTaille();
+        for(int i = 0; i< k; i++) {
+            cov += ((vi.getDonnees().get(i)-vi.getMoyenne())*(vd.getDonnees().get(i)-vd.getMoyenne()));
         }
-        return cov/(vd.taille-1);
+        return cov/(k -1);
     }
 
     /** calcul Beta1
@@ -81,21 +87,21 @@ public class RegressionLineaire {
      * @return F
      */
     double getF() {
-        return (getSCM()*(vd.taille-2))/getSCE();
+        return (getSCM()*(vd.getTaille() -2))/getSCE();
     }
 
     /** compare F avec la zone de rejet de la table de Fisher
      * @return la décision de rejeter ou non H0, sous forme d'une string
      */
-    String decision() {
+    public String decision() {
         String s = "H0 = x n'a pas d'effet sur y \nCovariance = " + getCov() +"\nBeta1 = "+getBeta1()+"\nBeta0 = "+ getBeta0()+"\nr = "+ getr() + "\nR² = "+getR()+"\n";
         CSVFisherReader csv = new CSVFisherReader();
         if(getR()<0.8) {
             return (s+"Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
            // throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree")
         }
-        s += "SCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(1,vd.taille-2)+"\n";
-        if (getF()>csv.getQuantile(1,vd.taille-2)) {
+        s += "SCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(1, vd.getTaille() -2)+"\n";
+        if (getF()>csv.getQuantile(1, vd.getTaille() -2)) {
             return(s+ "Au seuil 5%, on rejete H0 : x a un effet sur y");
            // return true;
         }
@@ -106,8 +112,8 @@ public class RegressionLineaire {
     /** calcul les points de la droite de régression linéaire
      * @return les points de cette droite
      */
-    double[] getReg(){
-        int i = vi.taille;
+    public double[] getReg(){
+        int i = vi.getTaille();
         double[] reg = new double[i];
         double beta0=getBeta0(),beta1=getBeta1();
         for(int x=0;x<i;x++)reg[x]=beta1*x+beta0;
@@ -117,11 +123,12 @@ public class RegressionLineaire {
     /** calcul les valeurs ajustées de y
      * @return un tableau contenant les valeurs ajustées de y
      */
-    double[] getYjust(){
-        double[] yjust = new double[vi.taille];
+    public double[] getYjust(){
+        double[] yjust = new double[vi.getTaille()];
         int k=0;
         double beta0=getBeta0(),beta1=getBeta1();
-        for (double i: vi.donnees){
+        List<Double> vi2 = vi.getDonnees();
+        for (double i:vi2 ){
             yjust[k] = beta1*i+beta0;
             k++;
         }

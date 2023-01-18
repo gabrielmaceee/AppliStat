@@ -1,4 +1,4 @@
-package com.example.statistiques;
+package Statistiques.Exception;
 
 /**
  * cette exception est levée si les échantillons ne sont pas de même taille

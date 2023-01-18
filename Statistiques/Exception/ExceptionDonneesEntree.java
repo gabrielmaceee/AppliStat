@@ -1,7 +1,7 @@
-package com.example.statistiques;
+package Statistiques.Exception;
 
 /**
- * cette exception est levée si il y a un null
+ * cette exception est levée s'il y a un null
  */
 public class ExceptionDonneesEntree extends Exception{
     public ExceptionDonneesEntree(){
