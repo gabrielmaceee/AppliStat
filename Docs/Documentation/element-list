@@ -1,0 +1,6 @@
+module:com.example.statistiques
+com.example.statistiques
+com.example.statistiques.Affichage
+com.example.statistiques.Calcul
+com.example.statistiques.Exception
+com.example.statistiques.Lecture
