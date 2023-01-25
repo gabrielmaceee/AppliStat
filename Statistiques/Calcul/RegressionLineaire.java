@@ -1,8 +1,9 @@
-package Statistiques.Calcul;
+package com.example.statistiques.Calcul;
 
-import Statistiques.Exception.ExceptionTailleEchantillon;
-import Statistiques.Lecture.CSVFisherReader;
+import com.example.statistiques.Exception.ExceptionTailleEchantillon;
+import com.example.statistiques.Lecture.CSVFisherReader;
 
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -18,11 +19,16 @@ public class RegressionLineaire {
      */
     private Echantillon vi;
 
+    private Path p;
     /**
      * @param vi echantillon de la vairable x
      * @param vd echantillon de la variable y
      * @throws ExceptionTailleEchantillon
      */
+    public RegressionLineaire(Echantillon vi, Echantillon vd, Path path) throws ExceptionTailleEchantillon {
+        this(vi,vd);
+        p = path;
+    }
     public RegressionLineaire(Echantillon vi, Echantillon vd) throws ExceptionTailleEchantillon {
         if (vi.getTaille() != vd.getTaille()) throw new ExceptionTailleEchantillon();
         this.vd = vd;
@@ -95,7 +101,9 @@ public class RegressionLineaire {
      */
     public String decision() {
         String s = "H0 = x n'a pas d'effet sur y \nCovariance = " + getCov() +"\nBeta1 = "+getBeta1()+"\nBeta0 = "+ getBeta0()+"\nr = "+ getr() + "\nR² = "+getR()+"\n";
-        CSVFisherReader csv = new CSVFisherReader();
+        CSVFisherReader csv;
+        if (p == null) csv = new CSVFisherReader();
+        else csv = new CSVFisherReader(p);
         if(getR()<0.8) {
             return (s+"Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree");
            // throw new RuntimeException("Moins de 80 % de la variance est expliquée par le modèle, une régression lineaire n'est donc pas toleree")

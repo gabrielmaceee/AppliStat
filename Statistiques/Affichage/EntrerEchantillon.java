@@ -1,13 +1,13 @@
-package Statistiques.Affichage;
+package com.example.statistiques.Affichage;
 
-import Statistiques.Calcul.Anova;
-import Statistiques.Calcul.Chi2;
-import Statistiques.Calcul.Echantillon;
-import Statistiques.Calcul.RegressionLineaire;
-import Statistiques.Exception.ExceptionDonneesEntree;
-import Statistiques.Exception.ExceptionNombreEchantillons;
-import Statistiques.Exception.ExceptionTailleEchantillon;
-import Statistiques.Lecture.EchantillonReader;
+import com.example.statistiques.Calcul.Anova;
+import com.example.statistiques.Calcul.Chi2;
+import com.example.statistiques.Calcul.Echantillon;
+import com.example.statistiques.Calcul.RegressionLineaire;
+import com.example.statistiques.Exception.ExceptionDonneesEntree;
+import com.example.statistiques.Exception.ExceptionNombreEchantillons;
+import com.example.statistiques.Exception.ExceptionTailleEchantillon;
+import com.example.statistiques.Lecture.EchantillonReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +26,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -41,8 +42,9 @@ public class EntrerEchantillon extends Application{
      * compteur du nombre d'échantillon
      */
     private int compteur = 0;
+    private Path path;
     public void start(Stage primaryStage)  {
-        primaryStage.setTitle("Coucou");
+        primaryStage.setTitle("Statface");
 
         GridPane gp =new GridPane();
         gp.setHgap(0);
@@ -68,7 +70,6 @@ public class EntrerEchantillon extends Application{
         gp.setGridLinesVisible(true);
         Scene scene = new Scene(gp);
         primaryStage.setScene(scene);
-
 
         GridPane grid = new GridPane();
         TextArea entree = new TextArea();
@@ -205,12 +206,16 @@ public class EntrerEchantillon extends Application{
         grid3.setVgap(10);
         Label regle = new Label("""
                 Pour créer un échantillon à l'écrit:
-                 La syntaxe à respectée est de séparer chaque nombre par un';'.
+                La syntaxe à respectée est de séparer chaque nombre par un';'.
                 Vous pouvez faire des espaces et des retours à la ligne quand vous voulez.\s
-                Un échantillon doit être constitué d'au moins 2 nombres\n
+                Un échantillon doit être constitué d'au moins 2 nombres.
                 Pour la description d'un échantillon :
-                Si vous avez séléctionné plusieurs échantillons : Seul le premier séléctionné sera pris en compte
-                Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons
+                Pour pouvoir trouver un quantile, ou la fréquence d'un nombre,
+                veuillez écrire celui-ci dans l'écran principale, sans appuyez sur  "entrer".
+                Si vous avez séléctionnés plusieurs échantillons, seul le 1er séléctionné sera pris en compte.
+                Pour réaliser un test de régression linéaire ou d'anova, veuillez d'abord importer
+                le fichier "TableauFisher", (à télécharger avec l'appli) par le bouton "Table de Fisher".
+                Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons.
                 Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2""");
         grid3.add(regle,0,0);
 
@@ -255,9 +260,15 @@ public class EntrerEchantillon extends Application{
         gridRL.setAlignment(Pos.CENTER);
         grid4.setAlignment(Pos.TOP_CENTER);
         gridecran.setAlignment(Pos.CENTER);
+        Button btnTableFisher = new Button("Table de Fisher");
+        GridPane gridFisher = new GridPane();
+        gridFisher.setAlignment(Pos.TOP_CENTER);
+        gridFisher.setVgap(30);
+        Label lblConfig = new Label("Configurations");
+        gridFisher.add(lblConfig,0,0);
+        gridFisher.add(btnTableFisher,0,1);
 
-        gp.add(grid1,1,0);
-        gp.add(gridQCM,2,0);
+        gp.addRow(0,gridFisher,grid1, gridQCM);
         gp.addRow(1,grid2,grid, grid3);
         gp.addRow(2, gpech, gridecran,gridRL);
         gp.add(grid4,1,3);
@@ -296,7 +307,14 @@ public class EntrerEchantillon extends Application{
                 }
             }
         });
-        btnfile.setOnAction(new EventHandler<ActionEvent>() {
+        btnTableFisher.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle ( final ActionEvent e){
+                File file = fileChooser.showOpenDialog(primaryStage);
+                if(file==null)return;
+                path = file.toPath();
+            }
+        }); btnfile.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle ( final ActionEvent e){
                 File file = fileChooser.showOpenDialog(primaryStage);
@@ -306,7 +324,10 @@ public class EntrerEchantillon extends Application{
                 }
                 EchantillonReader er = new EchantillonReader(file.toPath().toString());
                 compteur = er.getCompteur();
-                if(compteur>=1) tabBtn[0].setVisible(true);
+                if(compteur>=1) {
+                    tabBtn[0].setVisible(true);
+                    lsBtnUnEchantillon.forEach(b -> b.setVisible(true));
+                }
                 if(compteur>=2) {
                     tabBtn[1].setVisible(true);
                     btnRL.setVisible(true);
@@ -562,10 +583,18 @@ public class EntrerEchantillon extends Application{
                         compt++;
                     }
                 }
+                if (path == null) {
+                    try {
+                        Anova an = new Anova(echAN);
+                        ecran.setText(an.decision());
+                    } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en) {
+                        ecran.setText(en.getMessage());
+                    }
+                }
                 try {
-                    Anova an = new Anova(echAN);
+                    Anova an = new Anova(echAN, path);
                     ecran.setText(an.decision());
-                } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en){
+                } catch (ExceptionNombreEchantillons | ExceptionTailleEchantillon en) {
                     ecran.setText(en.getMessage());
                 }
             }
@@ -600,22 +629,32 @@ public class EntrerEchantillon extends Application{
                 ecran.setText("Régression linéaire:");
                 int compt = 0;
                 Echantillon[] echRL = new Echantillon[2];
-                for(int i = 0;i<12;i++ ){
-                    if(tabBtn[i].isSelected()) {
+                for (int i = 0; i < 12; i++) {
+                    if (tabBtn[i].isSelected()) {
                         echRL[compt] = tabEch[i];
                         compt++;
-                        if(compt==2)break;
+                        if (compt == 2) break;
                     }
                 }
 
-                try {
-                    if(compt!=2) ecran.setText("Séléctionner 2 échantillons");
-                    else {
-                        RegressionLineaire RL = new RegressionLineaire(echRL[0], echRL[1]);
-                        ecran.setText(RL.decision());
+                if (path == null) {
+                    try {
+                        if (compt != 2) ecran.setText("Séléctionner 2 échantillons");
+                        else {
+                            RegressionLineaire RL = new RegressionLineaire(echRL[0], echRL[1]);
+                            ecran.setText(RL.decision());
+                        }
+                    } catch (ExceptionTailleEchantillon et) {
+                        ecran.setText(et.getMessage());
                     }
                 }
-                catch (ExceptionTailleEchantillon et){
+                try {
+                    if (compt != 2) ecran.setText("Séléctionner 2 échantillons");
+                    else {
+                        RegressionLineaire RL = new RegressionLineaire(echRL[0], echRL[1],path);
+                        ecran.setText(RL.decision());
+                    }
+                } catch (ExceptionTailleEchantillon et) {
                     ecran.setText(et.getMessage());
                 }
             }
@@ -626,7 +665,7 @@ public class EntrerEchantillon extends Application{
                 Stage stage = new Stage();
                 stage.setTitle("Les tests statistiques");
                 GridPane gpts = new GridPane();
-                Label lblTest = new Label("Les tests statisitques");
+                Label lblTest = new Label("Les tests statistiques");
                 lblTest.setAlignment(Pos.CENTER);
                 String s = """
                         Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,
@@ -840,10 +879,8 @@ public class EntrerEchantillon extends Application{
                 Stage stageQCM = new Stage();
                 ex.start(stageQCM);
             }});
-                
-                
-        //primaryStage.sizeToScene();
-        //primaryStage.setFullScreen(true);
+        primaryStage.setHeight(700);
+        primaryStage.setWidth(1250);
         primaryStage.show();
     }
 

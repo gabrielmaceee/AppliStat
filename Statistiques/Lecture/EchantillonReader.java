@@ -1,6 +1,6 @@
-package Statistiques.Lecture;
+package com.example.statistiques.Lecture;
 
-import Statistiques.Exception.ExceptionDonneesEntree;
+import com.example.statistiques.Exception.ExceptionDonneesEntree;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

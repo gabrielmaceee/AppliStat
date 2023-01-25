@@ -1,6 +1,6 @@
-package Statistiques.Calcul;
+package com.example.statistiques.Calcul;
 
-import Statistiques.Exception.ExceptionDonneesEntree;
+import com.example.statistiques.Exception.ExceptionDonneesEntree;
 
 import java.util.*;
 

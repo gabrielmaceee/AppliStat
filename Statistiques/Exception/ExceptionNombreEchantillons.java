@@ -1,4 +1,4 @@
-package Statistiques.Exception;
+package com.example.statistiques.Exception;
 
 /**
  * cette exception est levée si le nombre d'échantillons n'est pas respecté

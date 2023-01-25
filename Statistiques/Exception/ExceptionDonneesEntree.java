@@ -1,4 +1,4 @@
-package Statistiques.Exception;
+package com.example.statistiques.Exception;
 
 /**
  * cette exception est levée s'il y a un null
