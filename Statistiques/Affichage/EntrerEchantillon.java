@@ -1,13 +1,13 @@
 package Statistiques.Affichage;
 
+import Statistiques.Calcul.Anova;
 import Statistiques.Calcul.Chi2;
+import Statistiques.Calcul.Echantillon;
 import Statistiques.Calcul.RegressionLineaire;
 import Statistiques.Exception.ExceptionDonneesEntree;
-import Statistiques.Lecture.EchantillonReader;
-import Statistiques.Calcul.Anova;
-import Statistiques.Calcul.Echantillon;
 import Statistiques.Exception.ExceptionNombreEchantillons;
 import Statistiques.Exception.ExceptionTailleEchantillon;
+import Statistiques.Lecture.EchantillonReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +25,6 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +36,11 @@ public class EntrerEchantillon extends Application{
     /**
      * tableau contenant les echantillons de l'utilisateur
      */
-    Echantillon[] tabEch = new Echantillon[12];
+    private Echantillon[] tabEch = new Echantillon[12];
     /**
      * compteur du nombre d'échantillon
      */
-    int compteur = 0;
+    private int compteur = 0;
     public void start(Stage primaryStage)  {
         primaryStage.setTitle("Coucou");
 
@@ -791,8 +790,8 @@ public class EntrerEchantillon extends Application{
                         compteur++;
                         Echantillon dl = tabEch[i];
                         XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
-                        for (int k = 0; k < dl.taille; k++) {
-                            series1.getData().add(new XYChart.Data<>(k, dl.donnees.get(k)));
+                        for (int k = 0; k < dl.getTaille(); k++) {
+                            series1.getData().add(new XYChart.Data<>(k, dl.getDonnees().get(k)));
                         }
                         if (compteur == 1) vi = dl;
                         if (compteur == 2) vi2 = dl;
@@ -807,9 +806,9 @@ public class EntrerEchantillon extends Application{
                         Echantillon rld = new Echantillon(RL.getReg());
                         LineChart.Series<Number, Number> series2 = new LineChart.Series<>();
                         LineChart.Series<Number, Number> series3 = new LineChart.Series<>();
-                        for (int k = 0; k < rl.taille; k++) {
-                            series2.getData().add(new LineChart.Data(k, rl.donnees.get(k)));
-                            series3.getData().add(new LineChart.Data(k, rld.donnees.get(k)));
+                        for (int k = 0; k < rl.getTaille(); k++) {
+                            series2.getData().add(new LineChart.Data(k, rl.getDonnees().get(k)));
+                            series3.getData().add(new LineChart.Data(k, rld.getDonnees().get(k)));
                         }
                         lc.getData().add(series2);
                         lc.getData().add(series3);
@@ -831,7 +830,7 @@ public class EntrerEchantillon extends Application{
                 stage.setScene(scene);
                 stage.show();
 
-            }});
+            }}});
 
       
         QCM.setOnAction(new EventHandler<ActionEvent>() {

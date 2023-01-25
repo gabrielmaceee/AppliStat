@@ -10,9 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 /**
@@ -27,7 +25,7 @@ public class QCM extends Application {
     /**
      * note de l'utilisateur au qcm
      */
-    public int compteur = 0;
+    private int compteur = 0;
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("QCM");
@@ -171,11 +169,11 @@ public class QCM extends Application {
             public void handle(ActionEvent e) {
                 btnS1.setVisible(true);
                 btnVerif1.setVisible(false);
-                if(q1a.isSelected()==true) compteur++;
-                if(q1b.isSelected()==true)compteur--;
-                if(q1c.isSelected()==true)compteur--;
-                if(q1d.isSelected()==true)compteur++;
-                if(q1e.isSelected()==true)compteur--;
+                if(q1a.isSelected()) compteur++;
+                if(q1b.isSelected())compteur--;
+                if(q1c.isSelected())compteur--;
+                if(q1d.isSelected())compteur++;
+                if(q1e.isSelected())compteur--;
                 ta1.setText("Réponse : a,d"+"\nScore depuis le début : "+compteur);
             }});
         btnS1.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,11 +191,11 @@ public class QCM extends Application {
             public void handle(ActionEvent e) {
                 btnS2.setVisible(true);
                 btnVerif2.setVisible(false);
-                if(q2a.isSelected()==true) compteur--;
-                if(q2b.isSelected()==true)compteur++;
-                if(q2c.isSelected()==true)compteur++;
-                if(q2d.isSelected()==true)compteur++;
-                if(q2e.isSelected()==true)compteur--;
+                if(q2a.isSelected()) compteur--;
+                if(q2b.isSelected())compteur++;
+                if(q2c.isSelected())compteur++;
+                if(q2d.isSelected())compteur++;
+                if(q2e.isSelected())compteur--;
                 ta1.setText("Réponse : b,c,d"+"\nScore depuis le début : "+compteur);
             }});
         btnS2.setOnAction(new EventHandler<ActionEvent>() {
@@ -215,10 +213,10 @@ public class QCM extends Application {
             public void handle(ActionEvent e) {
                 btnS3.setVisible(true);
                 btnVerif3.setVisible(false);
-                if(q3a.isSelected()==true) compteur--;
-                if(q3b.isSelected()==true)compteur--;
-                if(q3c.isSelected()==true)compteur--;
-                if(q3d.isSelected()==true)compteur++;
+                if(q3a.isSelected()) compteur--;
+                if(q3b.isSelected())compteur--;
+                if(q3c.isSelected())compteur--;
+                if(q3d.isSelected())compteur++;
                 ta1.setText("Réponse : d"+"\nScore depuis le début : "+compteur);
             }});
         btnS3.setOnAction(new EventHandler<ActionEvent>() {
@@ -237,11 +235,11 @@ public class QCM extends Application {
             public void handle(ActionEvent e) {
                 btnS4.setVisible(true);
                 btnVerif4.setVisible(false);
-                if(q4a.isSelected()==true) compteur++;
-                if(q4b.isSelected()==true)compteur--;
-                if(q4c.isSelected()==true)compteur--;
-                if(q4d.isSelected()==true)compteur--;
-                if(q4e.isSelected()==true)compteur++;
+                if(q4a.isSelected()) compteur++;
+                if(q4b.isSelected())compteur--;
+                if(q4c.isSelected())compteur--;
+                if(q4d.isSelected())compteur--;
+                if(q4e.isSelected())compteur++;
                 ta1.setText("Réponse : a,e"+"\nScore depuis le début : "+compteur);
             }});
         btnS4.setOnAction(new EventHandler<ActionEvent>() {
@@ -259,11 +257,11 @@ public class QCM extends Application {
             public void handle(ActionEvent e) {
                 btnS5.setVisible(true);
                 btnVerif5.setVisible(false);
-                if(q5a.isSelected()==true) compteur--;
-                if(q5b.isSelected()==true)compteur++;
-                if(q5c.isSelected()==true)compteur--;
-                if(q5d.isSelected()==true)compteur--;
-                if(q5e.isSelected()==true)compteur++;
+                if(q5a.isSelected()) compteur--;
+                if(q5b.isSelected())compteur++;
+                if(q5c.isSelected())compteur--;
+                if(q5d.isSelected())compteur--;
+                if(q5e.isSelected())compteur++;
                 ta1.setText("Réponse : b,e"+"\nScore depuis le début : "+compteur);
             }});
         btnS5.setOnAction(new EventHandler<ActionEvent>() {
