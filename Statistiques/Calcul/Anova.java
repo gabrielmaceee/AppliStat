@@ -4,6 +4,8 @@ import com.example.statistiques.Exception.ExceptionNombreEchantillons;
 import com.example.statistiques.Exception.ExceptionTailleEchantillon;
 import com.example.statistiques.Lecture.CSVFisherReader;
 
+import java.nio.file.Path;
+
 /**
  * classe permettant de realiser un test d'anova
  */
@@ -34,11 +36,16 @@ public class Anova{
      */
     private double [] tabVariances;
 
+    private Path p;
     /**
      * @param tab : un tableau des échantillons de l'utilisateur
      * @throws ExceptionTailleEchantillon : si les echantillons sont de differentes tailles
      * @throws ExceptionNombreEchantillons : s'il y a moins de 2 echantillons
      */
+    public Anova(Echantillon[] tab, Path path) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons {
+        this(tab);
+        p = path;
+    }
     public Anova(Echantillon[] tab) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons {
             if (tab.length < 2) {
                 throw new ExceptionNombreEchantillons();
@@ -98,7 +105,9 @@ public class Anova{
      * @return la décision de rejetter H0 ou non, dans une string
      */
     public String decision() {
-        CSVFisherReader csv  = new CSVFisherReader();
+        CSVFisherReader csv;
+        if (p == null) csv = new CSVFisherReader();
+        else csv = new CSVFisherReader(p);
         String s = "H0 = égalité des moyennes \nSCM = "+getSCM()+"\n"+ "SCE = "+getSCE()+"\nindice F = "+getF() + "\nQuantile théorique = "+ csv.getQuantile(a-1,n-a)+"\n";
         if (getF()<csv.getQuantile(a-1,n-a)) {
             return (s +"Au seuil 5% on ne rejette pas H0");

@@ -21,13 +21,17 @@ public class CSVFisherReader {
     /**
      * chemin sous forme d'un chemin
      */
-    private Path path = Paths.get("src","main","resources", "TableauFisher(1).csv");
+    private Path path = Paths.get("src","main","data","TableauFisher(1).csv");
 
-
+    public CSVFisherReader (Path p){
+        path = p;
+        this.csvFile =path.toAbsolutePath().toString();
+    }
     public CSVFisherReader() {
         this.csvFile =path.toAbsolutePath().toString();
         System.out.println(csvFile);
     }
+
 
     /**
      * @param a1 : premier degré de liberté
