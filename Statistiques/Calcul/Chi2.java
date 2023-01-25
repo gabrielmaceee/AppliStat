@@ -1,4 +1,4 @@
-package Statistiques.Calcul;
+package com.example.statistiques.Calcul;
 
 /**
  * class permettant de realiser un test du chi2 d'indépendance

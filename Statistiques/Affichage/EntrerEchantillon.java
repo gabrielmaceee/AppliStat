@@ -1,13 +1,13 @@
-package Statistiques.Affichage;
+package com.example.statistiques.Affichage;
 
-import Statistiques.Calcul.Anova;
-import Statistiques.Calcul.Chi2;
-import Statistiques.Calcul.Echantillon;
-import Statistiques.Calcul.RegressionLineaire;
-import Statistiques.Exception.ExceptionDonneesEntree;
-import Statistiques.Exception.ExceptionNombreEchantillons;
-import Statistiques.Exception.ExceptionTailleEchantillon;
-import Statistiques.Lecture.EchantillonReader;
+import com.example.statistiques.Calcul.Anova;
+import com.example.statistiques.Calcul.Chi2;
+import com.example.statistiques.Calcul.Echantillon;
+import com.example.statistiques.Calcul.RegressionLineaire;
+import com.example.statistiques.Exception.ExceptionDonneesEntree;
+import com.example.statistiques.Exception.ExceptionNombreEchantillons;
+import com.example.statistiques.Exception.ExceptionTailleEchantillon;
+import com.example.statistiques.Lecture.EchantillonReader;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -208,7 +208,9 @@ public class EntrerEchantillon extends Application{
                  La syntaxe à respectée est de séparer chaque nombre par un';'.
                 Vous pouvez faire des espaces et des retours à la ligne quand vous voulez.\s
                 Un échantillon doit être constitué d'au moins 2 nombres\n
-                Pour la description d'un échantillon :
+                Pour la description d'un échantillon :\n
+                Pour pouvoir trouver un quantile, ou la fréquence d'un nombre,\n
+                veuillez écrire celui-ci dans l'écran principale, sans appuyez sur  "entrer"\n 
                 Si vous avez séléctionné plusieurs échantillons : Seul le premier séléctionné sera pris en compte
                 Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons
                 Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2""");
@@ -306,7 +308,10 @@ public class EntrerEchantillon extends Application{
                 }
                 EchantillonReader er = new EchantillonReader(file.toPath().toString());
                 compteur = er.getCompteur();
-                if(compteur>=1) tabBtn[0].setVisible(true);
+                if(compteur>=1) {
+                    tabBtn[0].setVisible(true);
+                    lsBtnUnEchantillon.forEach(b -> b.setVisible(true));
+                }
                 if(compteur>=2) {
                     tabBtn[1].setVisible(true);
                     btnRL.setVisible(true);
@@ -626,7 +631,7 @@ public class EntrerEchantillon extends Application{
                 Stage stage = new Stage();
                 stage.setTitle("Les tests statistiques");
                 GridPane gpts = new GridPane();
-                Label lblTest = new Label("Les tests statisitques");
+                Label lblTest = new Label("Les tests statistiques");
                 lblTest.setAlignment(Pos.CENTER);
                 String s = """
                         Dans le domaine des statistiques, un test est une procédure permettant de rejeter ou non une hypothèse,

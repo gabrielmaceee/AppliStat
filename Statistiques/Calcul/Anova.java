@@ -1,8 +1,8 @@
-package Statistiques.Calcul;
+package com.example.statistiques.Calcul;
 
-import Statistiques.Exception.ExceptionNombreEchantillons;
-import Statistiques.Exception.ExceptionTailleEchantillon;
-import Statistiques.Lecture.CSVFisherReader;
+import com.example.statistiques.Exception.ExceptionNombreEchantillons;
+import com.example.statistiques.Exception.ExceptionTailleEchantillon;
+import com.example.statistiques.Lecture.CSVFisherReader;
 
 /**
  * classe permettant de realiser un test d'anova

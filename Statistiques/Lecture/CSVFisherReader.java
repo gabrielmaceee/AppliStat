@@ -1,4 +1,4 @@
-package Statistiques.Lecture;
+package com.example.statistiques.Lecture;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -21,7 +21,7 @@ public class CSVFisherReader {
     /**
      * chemin sous forme d'un chemin
      */
-    private Path path = Paths.get("src","main","Data","TableauFisher(1).csv");
+    private Path path = Paths.get("src","main","resources", "TableauFisher(1).csv");
 
 
     public CSVFisherReader() {

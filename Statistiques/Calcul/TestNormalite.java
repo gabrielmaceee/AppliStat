@@ -1,4 +1,4 @@
-package Statistiques.Calcul;
+package com.example.statistiques.Calcul;
 
 import java.util.List;
 
