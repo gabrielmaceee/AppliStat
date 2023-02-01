@@ -3,7 +3,7 @@ package com.example.statistiques.Calcul;
 import java.util.List;
 
 /**
- * class permettant de tester la normalité des erreurs d'un echantillon
+ * class permettant de tester la normalité des erreurs d'un echantillon grâce au test de Jarque-Bera
  */
 public class TestNormalite {
     /**

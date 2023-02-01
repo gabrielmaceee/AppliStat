@@ -97,10 +97,10 @@ public class Chi2 {
     public String decision() {
         String s = "H0 :  x et y sont indépendants \n" + getDifference();
         if(getDifference() <= tabCHI2[degreLiberte-1]) {
-            s+= "Décision : Au seuil 5% nous rejetons l'indépendance des variables";
+            s+= "\nDécision : Au seuil 5% nous rejetons l'indépendance des variables";
             return s;
         }
-        s+="Décision : Au seuil 5%, nous ne pouvons pas rejeter l'indépendance des variables";
+        s+="\nDécision : Au seuil 5%, nous ne pouvons pas rejeter l'indépendance des variables";
         return s;
     }
 

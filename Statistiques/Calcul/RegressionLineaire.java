@@ -19,16 +19,25 @@ public class RegressionLineaire {
      */
     private Echantillon vi;
 
+    /**
+     * chemin vers le fichier TableauFisher.csv
+     */
     private Path p;
     /**
      * @param vi echantillon de la vairable x
      * @param vd echantillon de la variable y
+     * @param path : chemin vers le fichier TableauFisher.csv
      * @throws ExceptionTailleEchantillon
      */
     public RegressionLineaire(Echantillon vi, Echantillon vd, Path path) throws ExceptionTailleEchantillon {
         this(vi,vd);
         p = path;
     }
+    /**
+     * @param vi echantillon de la vairable x
+     * @param vd echantillon de la variable y
+     * @throws ExceptionTailleEchantillon
+     */
     public RegressionLineaire(Echantillon vi, Echantillon vd) throws ExceptionTailleEchantillon {
         if (vi.getTaille() != vd.getTaille()) throw new ExceptionTailleEchantillon();
         this.vd = vd;

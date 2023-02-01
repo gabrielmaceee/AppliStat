@@ -42,6 +42,9 @@ public class EntrerEchantillon extends Application{
      * compteur du nombre d'échantillon
      */
     private int compteur = 0;
+    /**
+     * chemin vers le fichier TableauFisher.csv
+     */
     private Path path;
     public void start(Stage primaryStage)  {
         primaryStage.setTitle("Statface");
@@ -202,9 +205,9 @@ public class EntrerEchantillon extends Application{
         lsBtnUnEchantillon.forEach(b -> b.setVisible(false));
         
         GridPane grid3 = new GridPane();
-        grid3.setHgap(10);
-        grid3.setVgap(10);
-        Label regle = new Label("""
+        //grid3.setHgap(10);
+        //grid3.setVgap(10);
+        TextArea regle = new TextArea("""
                 Pour créer un échantillon à l'écrit:
                 La syntaxe à respectée est de séparer chaque nombre par un';'.
                 Vous pouvez faire des espaces et des retours à la ligne quand vous voulez.\s
@@ -218,6 +221,8 @@ public class EntrerEchantillon extends Application{
                 Pour réaliser un test de régression linéaire veuillez séléctionner 2 de vos échantillons.
                 Pour un test d'anova ou de chi2 d'indépendance il faut en sélectionner au moins 2""");
         grid3.add(regle,0,0);
+        regle.setEditable(false);
+
 
         GridPane gridRL =new GridPane();
         gridRL.setHgap(10);
@@ -269,7 +274,7 @@ public class EntrerEchantillon extends Application{
         gridFisher.add(btnTableFisher,0,1);
 
         gp.addRow(0,gridFisher,grid1, gridQCM);
-        gp.addRow(1,grid2,grid, grid3);
+        gp.addRow(1,grid2,grid, regle);
         gp.addRow(2, gpech, gridecran,gridRL);
         gp.add(grid4,1,3);
         final Text actiontarget = new Text();

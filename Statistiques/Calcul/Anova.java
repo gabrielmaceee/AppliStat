@@ -36,9 +36,13 @@ public class Anova{
      */
     private double [] tabVariances;
 
+    /**
+     * chemin vers le fichier TableauFisher.csv
+     */
     private Path p;
     /**
      * @param tab : un tableau des échantillons de l'utilisateur
+     * @param path : chemin vers le fichier TableauFisher.csv
      * @throws ExceptionTailleEchantillon : si les echantillons sont de differentes tailles
      * @throws ExceptionNombreEchantillons : s'il y a moins de 2 echantillons
      */
@@ -46,6 +50,11 @@ public class Anova{
         this(tab);
         p = path;
     }
+    /**
+     * @param tab : un tableau des échantillons de l'utilisateur
+     * @throws ExceptionTailleEchantillon : si les echantillons sont de differentes tailles
+     * @throws ExceptionNombreEchantillons : s'il y a moins de 2 echantillons
+     */
     public Anova(Echantillon[] tab) throws ExceptionTailleEchantillon, ExceptionNombreEchantillons {
             if (tab.length < 2) {
                 throw new ExceptionNombreEchantillons();
