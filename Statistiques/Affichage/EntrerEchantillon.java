@@ -248,12 +248,17 @@ public class EntrerEchantillon extends Application{
         GridPane grid4 = new GridPane();
         grid4.setHgap(10);
         grid4.setVgap(10);
-        Button btn4 = new Button("Graphique");
+        Button btn4 = new Button("Echantillons");
         HBox hbBtn4 = new HBox(10);
+        Button btnGRL = new Button("Régression linéaire");
+        HBox hbBtnGRL = new HBox(10);
         //hbBtn4.setAlignment(Pos.TOP_RIGHT);
         hbBtn4.getChildren().add(btn4);
         grid4.add(hbBtn4, 0, 1);
         grid4.add(t4,0,0);
+        hbBtnGRL.getChildren().add(btnGRL);
+        grid4.add(hbBtnGRL, 0, 2);
+
 
         grid1.setAlignment(Pos.TOP_CENTER);                         
         gridQCM.setAlignment(Pos.CENTER);
@@ -282,7 +287,6 @@ public class EntrerEchantillon extends Application{
 
         final Text actiontarget2 = new Text();
         grid3.add(actiontarget2, 0, 1);
-
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -798,6 +802,89 @@ public class EntrerEchantillon extends Application{
                 stage.setScene(scene);
                 stage.show();
             }});
+        btnGRL.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                SplitPane splitPane1;
+                Stage stage = new Stage();
+                int compt = 0;
+                Echantillon[] echRL = new Echantillon[2];
+                for (int i = 0; i < 12; i++) {
+                    if (tabBtn[i].isSelected()) {
+                        echRL[compt] = tabEch[i];
+                        compt++;
+                        if (compt == 2) break;
+                    }
+                }
+                stage.setTitle("Bar Chart Sample");
+                double min=0;
+                double max=0;
+                double maxl=0;
+                double minl =0;
+                        min = Math.min(min, echRL[0].getMinimum());
+                        max = Math.max(max, echRL[0].getMaximum())+5;
+                        minl = Math.min(min, echRL[1].getMinimum());
+                        maxl = Math.max(max, echRL[1].getMaximum())+5;
+
+                final NumberAxis xAxis = new NumberAxis(0,maxl,(int)(maxl/5));
+                final NumberAxis yAxis = new NumberAxis((int)min-1,(int) max+1,(max-min)/5);
+                final NumberAxis xAxis1 = new NumberAxis(0,maxl,(int)(maxl/5));
+                final NumberAxis yAxis2 = new NumberAxis((int)min-1,(int)max+1,(max-min)/5);
+                final ScatterChart<Number, Number> bc = new ScatterChart<>(xAxis, yAxis);
+                //for (int i = 0; i < compt.length; i++) {
+                   // if (compt[0] != 0 && compt [1]!=0) {
+                       // compteur++;
+                       // Echantillon dl = tabEch[0];
+
+                        XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
+                        for (int k = 0; k < echRL[0].getTaille(); k++) {
+                            series1.getData().add(new XYChart.Data<>(echRL[0].getDonnees().get(k), echRL[1].getDonnees().get(k)));
+                            System.out.println(k);
+                            System.out.println(echRL[0].getDonnees().get(k));
+                            // if (compteur == 1) vi = dl;
+                            // if (compteur == 2) vi2 = dl;
+                        }
+                            bc.getData().add(series1);
+
+                  //  }
+            //}
+                    final LineChart<Number, Number> lc = new LineChart<>(xAxis1, yAxis2);
+                    if (compteur == 2) {
+                        try {
+                            RegressionLineaire RL = new RegressionLineaire(echRL[0], echRL[1]);
+                        Echantillon rl = new Echantillon(RL.getYjust());
+                        Echantillon rld = new Echantillon(RL.getReg());
+                        LineChart.Series<Number, Number> series2 = new LineChart.Series<>();
+                        LineChart.Series<Number, Number> series3 = new LineChart.Series<>();
+                        /*for (int k = 0; k < rl.getTaille(); k++) {
+                            series2.getData().add(new LineChart.Data(echRL[0].getDonnees().get(k), rl.getDonnees().get(k)));
+                        }*/
+                        for (int k = (int) min; k < (int) max; k++) {
+                                series3.getData().add(new LineChart.Data(k, RL.getBeta1()*k + RL.getBeta0()));
+                        }
+                        lc.getData().add(series2);
+                        lc.getData().add(series3);
+                    } catch(ExceptionTailleEchantillon ex){
+                        ecran.setText("taille des échantillons différentes");
+
+                    }
+                lc.setLegendVisible(false);
+                    bc.setLegendVisible(false);
+                splitPane1 = new SplitPane();
+                StackPane stackpane = new StackPane();
+                stackpane.getChildren().add(bc);
+                stackpane.getChildren().add(lc);
+                lc.opacityProperty().set(.4);
+                splitPane1.setOrientation(Orientation.VERTICAL);
+                splitPane1.getItems().addAll(stackpane);
+                splitPane1.setDividerPosition(0, 1);
+                Scene scene = new Scene(stackpane, 800, 600);
+                stage.setScene(scene);
+                stage.show();
+
+            }}});
+
         btn4.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -841,42 +928,24 @@ public class EntrerEchantillon extends Application{
                         if (compteur == 2) vi2 = dl;
                         bc.getData().add(series1);
                     }
-            }
-                    final LineChart<Number, Number> lc = new LineChart<>(xAxis1, yAxis2);
-                    if (compteur == 2) {
-                        try {
-                            RegressionLineaire RL = new RegressionLineaire(vi, vi2);
-                        Echantillon rl = new Echantillon(RL.getYjust());
-                        Echantillon rld = new Echantillon(RL.getReg());
-                        LineChart.Series<Number, Number> series2 = new LineChart.Series<>();
-                        LineChart.Series<Number, Number> series3 = new LineChart.Series<>();
-                        for (int k = 0; k < rl.getTaille(); k++) {
-                            series2.getData().add(new LineChart.Data(k, rl.getDonnees().get(k)));
-                            series3.getData().add(new LineChart.Data(k, rld.getDonnees().get(k)));
-                        }
-                        lc.getData().add(series2);
-                        lc.getData().add(series3);
-                    } catch(ExceptionTailleEchantillon ex){
-                        ecran.setText("taille des échantillons différentes");
+                }
+                final LineChart<Number, Number> lc = new LineChart<>(xAxis1, yAxis2);
 
-                    }
-                lc.setLegendVisible(false);
+                    lc.setLegendVisible(false);
                     bc.setLegendVisible(false);
-                splitPane1 = new SplitPane();
-                StackPane stackpane = new StackPane();
-                stackpane.getChildren().add(bc);
-                stackpane.getChildren().add(lc);
-                lc.opacityProperty().set(.4);
-                splitPane1.setOrientation(Orientation.VERTICAL);
-                splitPane1.getItems().addAll(stackpane);
-                splitPane1.setDividerPosition(0, 1);
-                Scene scene = new Scene(stackpane, 800, 600);
-                stage.setScene(scene);
-                stage.show();
+                    splitPane1 = new SplitPane();
+                    StackPane stackpane = new StackPane();
+                    stackpane.getChildren().add(bc);
+                    stackpane.getChildren().add(lc);
+                    lc.opacityProperty().set(.4);
+                    splitPane1.setOrientation(Orientation.VERTICAL);
+                    splitPane1.getItems().addAll(stackpane);
+                    splitPane1.setDividerPosition(0, 1);
+                    Scene scene = new Scene(stackpane, 800, 600);
+                    stage.setScene(scene);
+                    stage.show();
 
-            }}});
-
-      
+                }});
         QCM.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

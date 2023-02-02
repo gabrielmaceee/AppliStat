@@ -59,14 +59,14 @@ public class RegressionLineaire {
     /** calcul Beta1
      * @return Beta1
      */
-    double getBeta1(){
+   public double getBeta1(){
         return getCov()/vi.getVariance();
     }
 
     /** calcul Beta0
      * @return Beta0
      */
-    double getBeta0() {
+    public double getBeta0() {
         return vd.getMoyenne()- (getBeta1()*vi.getMoyenne());
     }
 
